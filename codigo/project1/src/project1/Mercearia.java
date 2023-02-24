@@ -26,7 +26,7 @@ public class Mercearia {
 	}
 	
 	/********************
-		Métodos
+		Mï¿½todos
 	********************/
 	
 	/**
@@ -44,10 +44,10 @@ public class Mercearia {
 	}
 	
 	/**
-	 * @param descrição descrição do produto a ser adicionado
+	 * @param descriï¿½ï¿½o descriï¿½ï¿½o do produto a ser adicionado
 	 */
-	public void adicionarProduto(String descrição) {
-		Produto produto = new Produto(descrição);
+	public void adicionarProduto(String descricao) {
+		Produto produto = new Produto(descricao);
 		this.listaProdutos.inserirFim(produto);
 	}
 	

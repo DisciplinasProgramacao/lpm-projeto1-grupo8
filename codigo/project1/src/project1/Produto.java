@@ -18,10 +18,10 @@ public class Produto {
 	
 	private Integer ID;
 	
-	//descrição do produto, deve possuir apenas 3 caracteres, descrição.lenght >= 3 ?
-	private String descrição;
+	//descriï¿½ï¿½o do produto, deve possuir apenas 3 caracteres, descriï¿½ï¿½o.lenght >= 3 ?
+	private String descricao;
 	
-	//registrar qtd em estoque, quantidade mínima de cada produto é 10 itens.
+	//registrar qtd em estoque, quantidade mï¿½nima de cada produto ï¿½ 10 itens.
 	private int quantidadeEstoque;
 	
 	//registrar qtd total comprada, poderia ser qtdTotalVendas + qtdEstoque, mas pode ter perda de estoque futuramente.
@@ -42,7 +42,7 @@ public class Produto {
 	public Produto() {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
-		this.descrição = "";
+		this.descricao = "";
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
@@ -50,12 +50,12 @@ public class Produto {
 	}
 	
 	/**
-	 * @param descrição nome/descrição
+	 * @param descriï¿½ï¿½o nome/descriï¿½ï¿½o
 	 */
-	public Produto(String descrição) {
+	public Produto(String descricao) {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
-		this.descrição = descrição;
+		this.descricao = descricao;
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
@@ -63,7 +63,7 @@ public class Produto {
 	}
 	
 	/********************
-		Métodos
+		Mï¿½todos
 	********************/
 	
 	/**
@@ -74,20 +74,20 @@ public class Produto {
 	}
 	
 	/**
-	 * Retorna descrição
-	 * @return descrição descrição
+	 * Retorna descriï¿½ï¿½o
+	 * @return descriï¿½ï¿½o descriï¿½ï¿½o
 	 */
-	public String getDescrição() {
-		return descrição;
+	public String getDescricao() {
+		return descricao;
 	}
 
 
 	/**
-	 * Altera descrição
-	 * @param descrição nova descrição
+	 * Altera descriï¿½ï¿½o
+	 * @param descricao nova descriï¿½ï¿½o
 	 */
-	public void setDescrição(String descrição) {
-		this.descrição = descrição;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	/**
