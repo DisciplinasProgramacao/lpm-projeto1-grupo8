@@ -31,10 +31,14 @@ public class Produto {
 	private int quantidadeTotalVendas;
 	
 	//registrar valor bruto em dinheiro de vendas.
-	private Double valorTotalVendas;
+	private double valorTotalVendas;
 
+	//registrar o custo do produto
+	private double custo;
 	
-	
+	//registrar o custo do produto
+	private double valorVenda;
+
 	/********************
 		Contrutores
 	********************/
@@ -47,6 +51,8 @@ public class Produto {
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
 		this.valorTotalVendas = 0.0;
+		this.custo = 0.0;
+		this.valorVenda = 0.0;
 	}
 	
 	/**
@@ -60,6 +66,9 @@ public class Produto {
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
 		this.valorTotalVendas = 0.0;
+		this.custo = 0.0;
+		this.valorVenda = 0.0;
+
 	}
 	
 	/********************
@@ -110,5 +119,8 @@ public class Produto {
 		return quantidadeEstoque<10? false:true;
 	}
 
-	
+	public double valorTotalVendas() {
+		this.valorTotalVendas = CalculaValorArrecadado.calculaValorArrecadado(this.valorVenda, this.quantidadeTotalVendas);
+		return valorTotalVendas;
+	}
 }
