@@ -18,10 +18,10 @@ public class Produto {
 	
 	private Integer ID;
 	
-	//descri��o do produto, deve possuir apenas 3 caracteres, descri��o.lenght >= 3 ?
+	//descricao do produto, deve possuir apenas 3 caracteres, descricao.lenght >= 3 ?
 	private String descricao;
 	
-	//registrar qtd em estoque, quantidade m�nima de cada produto � 10 itens.
+	//registrar qtd em estoque, quantidade minima de cada produto � 10 itens.
 	private int quantidadeEstoque;
 	
 	//registrar qtd total comprada, poderia ser qtdTotalVendas + qtdEstoque, mas pode ter perda de estoque futuramente.
@@ -35,7 +35,12 @@ public class Produto {
 
 	//registrar valor bruto de compra
 	private Double valorCompra;
+	
+	//registrar o valor do imposto
+	private Double valorDoImposto;
 
+	//registrar o valor do preco de venda
+	private Double precoVenda;
 	
 	
 	/********************
@@ -51,12 +56,14 @@ public class Produto {
 		this.quantidadeTotalVendas = 0;
 		this.valorTotalVendas = 0.0;
 		this.valorCompra = 0.0;
+		this.valorDoImposto = 0.0;
+		this.precoVenda = 0.0;
 	}
 	
 	/**
-	 * @param descri��o nome/descri��o
+	 * @param descricao nome/descricao
 	 */
-	public Produto(String descricao, Double valorCompra, int quantidadeVendida) {
+	public Produto(String descricao, Double valorCompra, int quantidadeVendida, Double valorDoImposto, Double precoVenda) {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
 		this.descricao = descricao;
@@ -65,32 +72,36 @@ public class Produto {
 		this.quantidadeTotalVendas = quantidadeVendida;
 		this.valorTotalVendas = 0.0;
 		this.valorCompra = valorCompra;
+		this.valorDoImposto = 0.0;
+		this.precoVenda = 0.0;
 	}
 	
 	/********************
-		M�todos
+		Metodos
 	********************/
 	
-	/**
-	 * @return ID do produto (gerado automaticamente)
-	 */
+	/**GETS**/
 	public Integer getID() {
 		return this.ID;
 	}
 	
-	/**
-	 * Retorna descri��o
-	 * @return descri��o descri��o
-	 */
 	public String getDescricao() {
 		return descricao;
 	}
 
+	public int getQuantidade() {
+		return quantidadeEstoque;
+	}
 
-	/**
-	 * Altera descri��o
-	 * @param descricao nova descri��o
-	 */
+	public Double getValorCompra() {
+		return valorCompra;
+	}
+
+	public int getQuantidadeVendidas() {
+		return quantidadeTotalVendas;
+	}
+	
+	/**SETS**/
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
@@ -103,21 +114,6 @@ public class Produto {
 		this.quantidadeTotalVendas = quantidadeTotalVendas;
 	}
 
-	/**
-	 * Retorna quantidade
-	 * @return quantidade quatidade
-	 */
-	public int getQuantidade() {
-		return quantidadeEstoque;
-	}
-
-	public Double getValorCompra() {
-		return valorCompra;
-	}
-
-	public int getQuantidadeVendidas() {
-		return quantidadeTotalVendas;
-	}
 
 	/**
 	 * Realizar vendas
