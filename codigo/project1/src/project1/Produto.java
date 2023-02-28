@@ -143,14 +143,14 @@ public class Produto {
 	}
 
 	/*Calcular Imposto*/
-	public Double calcularImposto(Double precoVenda ){ //após calcular o lucro, terminar aqui
-		valorImposto = 0.18*(precoVenda);
+	public Double calcularImposto(Double valorCompra ){ //após calcular o lucro, terminar aqui
+		valorImposto = 0.18*(valorCompra);
 		return valorImposto;
 	}
 
 	/*Calcular preco de venda*/
 	public Double calcularPrecoDeVenda(Double valorCompra, Double valorImposto){ //após calcular o lucro, terminar aqui
-		precoVenda = valorCompra + valorImposto;
+		precoVenda = valorCompra + calcularImposto(valorCompra);
 		return precoVenda;
 	}
 }
