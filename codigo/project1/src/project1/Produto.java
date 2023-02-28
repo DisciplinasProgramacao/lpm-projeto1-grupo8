@@ -18,7 +18,7 @@ public class Produto {
 	
 	private Integer ID;
 	
-	//descricao do produto, deve possuir apenas 3 caracteres, descricao.lenght >= 3 ?
+	//descricao do produto, deve possuir um mínimo de 3 caracteres, descricao.lenght >= 3 ?
 	private String descricao;
 	
 	//registrar qtd em estoque, quantidade minima de cada produto � 10 itens.
@@ -41,9 +41,6 @@ public class Produto {
 
 	//registrar o valor do preco de venda
 	private Double precoVenda;
-
-
-	
 	
 	/********************
 		Contrutores
@@ -152,5 +149,5 @@ public class Produto {
 	}
 
 	/*Calcular Imposto*/
-	public void 
+	/*public void */
 }
