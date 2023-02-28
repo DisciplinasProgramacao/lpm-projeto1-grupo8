@@ -33,6 +33,9 @@ public class Produto {
 	//registrar valor bruto em dinheiro de vendas.
 	private Double valorTotalVendas;
 
+	//registrar valor bruto de compra
+	private Double valorCompra;
+
 	
 	
 	/********************
@@ -47,19 +50,21 @@ public class Produto {
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
 		this.valorTotalVendas = 0.0;
+		this.valorCompra = 0.0;
 	}
 	
 	/**
 	 * @param descri��o nome/descri��o
 	 */
-	public Produto(String descricao) {
+	public Produto(String descricao, Double valorCompra, int quantidadeVendida) {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
 		this.descricao = descricao;
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
-		this.quantidadeTotalVendas = 0;
+		this.quantidadeTotalVendas = quantidadeVendida;
 		this.valorTotalVendas = 0.0;
+		this.valorCompra = valorCompra;
 	}
 	
 	/********************
@@ -90,12 +95,28 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
+	public void setValorCompra(Double valorCompra) {
+		this.valorCompra = valorCompra;
+	}
+
+	public void setQuantidadeTotalVendas(int quantidadeTotalVendas) {
+		this.quantidadeTotalVendas = quantidadeTotalVendas;
+	}
+
 	/**
 	 * Retorna quantidade
 	 * @return quantidade quatidade
 	 */
 	public int getQuantidade() {
 		return quantidadeEstoque;
+	}
+
+	public Double getValorCompra() {
+		return valorCompra;
+	}
+
+	public int getQuantidadeVendidas() {
+		return quantidadeTotalVendas;
 	}
 
 	/**
