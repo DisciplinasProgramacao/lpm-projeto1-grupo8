@@ -37,7 +37,7 @@ public class Produto {
 	private Double valorCompra;
 	
 	//registrar o valor do imposto
-	private Double valorDoImposto;
+	private Double valorImposto;
 
 	//registrar o valor do preco de venda
 	private Double precoVenda;
@@ -56,14 +56,14 @@ public class Produto {
 		this.quantidadeTotalVendas = 0;
 		this.valorTotalVendas = 0.0;
 		this.valorCompra = 0.0;
-		this.valorDoImposto = 0.0;
+		this.valorImposto = 0.0;
 		this.precoVenda = 0.0;
 	}
 	
 	/**
 	 * @param descricao nome/descricao
 	 */
-	public Produto(String descricao, Double valorCompra, int quantidadeVendida, Double valorDoImposto, Double precoVenda) {
+	public Produto(String descricao, Double valorCompra, int quantidadeVendida, Double valorImposto, Double precoVenda) {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
 		this.descricao = descricao;
@@ -72,7 +72,7 @@ public class Produto {
 		this.quantidadeTotalVendas = quantidadeVendida;
 		this.valorTotalVendas = 0.0;
 		this.valorCompra = valorCompra;
-		this.valorDoImposto = 0.0;
+		this.valorImposto = 0.0;
 		this.precoVenda = 0.0;
 	}
 	
@@ -101,6 +101,14 @@ public class Produto {
 		return quantidadeTotalVendas;
 	}
 	
+	public Double getValorImposto(){
+		return valorImposto;
+	}
+
+	public Double getPrecoVenda(){
+		return precoVenda;
+	}
+
 	/**SETS**/
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
@@ -114,6 +122,13 @@ public class Produto {
 		this.quantidadeTotalVendas = quantidadeTotalVendas;
 	}
 
+	public void setValorImposto(){
+		this.valorImposto = valorImposto;
+	}
+
+	public void setPrecoVenda(){
+		this.precoVenda = precoVenda;
+	}
 
 	/**
 	 * Realizar vendas
@@ -127,5 +142,6 @@ public class Produto {
 		return quantidadeEstoque<10? false:true;
 	}
 
-	
+	/*Calcular Imposto*/
+	public void 
 }
