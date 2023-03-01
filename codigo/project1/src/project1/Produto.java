@@ -117,10 +117,10 @@ public class Produto {
 		this.valorTotalVendas = 0;
 		this.valorTotalCompra = 0;
 		this.precoCusto = precoCusto;
-		if(quantidadeTotalAdquirida >=10)
-			efetuarCompra(quantidadeTotalAdquirida);
 		this.margemLucro = calcularMargemLucro(margemLucro);
 		this.precoVenda = calcularPrecoDeVendaUnitario(precoCusto);
+		if(quantidadeTotalAdquirida >=10)
+			efetuarCompra(quantidadeTotalAdquirida);
 	}
 	
 	/**
