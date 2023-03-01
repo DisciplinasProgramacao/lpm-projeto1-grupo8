@@ -26,7 +26,7 @@ public class Mercearia {
 	}
 	
 	/********************
-		M�todos
+		Métodos
 	********************/
 	
 	/**
@@ -42,21 +42,22 @@ public class Mercearia {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	/**
+
+		/**
 	 * @param descri��o descri��o do produto a ser adicionado
 	 */
-	public void adicionarProduto(String descricao, Double valorCompra, int quantidadeTotalVendas) {
-		Produto produto = new Produto(descricao, valorCompra, quantidadeTotalVendas);
+	//EM PROGRESSO
+	public void adicionarProduto(String descricao, Double precoCusto, int quantidadeTotalAdquirida) {
+		Produto produto = new Produto(descricao, precoCusto, quantidadeTotalAdquirida);
 		this.listaProdutos.inserirFim(produto);
 	}
-	
+
 	/**
 	 * @return lista duplamente encadeada com os produtos
 	 */
 	public ListaDuplamenteEncadeada getLista() {
 		return this.listaProdutos;
 	}
-
+	
 	
 }

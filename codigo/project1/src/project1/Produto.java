@@ -1,6 +1,3 @@
-/**
- * 
- */
 package project1;
 
 import java.util.logging.Logger;
@@ -11,34 +8,26 @@ import java.util.logging.Level;
  * @version 0.1
  *
  */
-public class Produto {	
-	//#region ATRIBUTOS
+public class Produto {
+	// #region ATRIBUTOS
 	private static Integer parseID;
-
 	private Integer ID;
-	
-	private String descricao; //Deve possuir um mínimo de 3 caracteres
-	
-	private int quantidadeEstoque; //Quantidade mínima de cada produto = 10 itens
-	
+	private String descricao; // Deve possuir um mínimo de 3 caracteres
+	private int quantidadeEstoque; // Quantidade mínima de cada produto = 10 itens
 	private int quantidadeTotalComprada;
-	
 	private int quantidadeTotalVendas;
-	
 	private Double valorTotalVendas;
-
 	private Double valorCompra;
-	
 	private Double valorImposto;
-
 	private Double precoVenda;
-
 	private Double precoCusto;
-	//#endregion
+	// #endregion
 
-	//#region CONSTRUTORES	
+	// #region CONSTRUTORES
 	public Produto() {
-		if(parseID == null) {parseID = 0;}
+		if (parseID == null) {
+			parseID = 0;
+		}
 		this.ID = ++parseID;
 		this.descricao = "";
 		this.quantidadeEstoque = 0;
@@ -50,34 +39,36 @@ public class Produto {
 		this.precoVenda = 0.0;
 		this.precoCusto = 0.0;
 	}
-	
+
 	/**
 	 * @param descricao nome/descricao
 	 */
-	public Produto(String descricao, Double valorCompra, int quantidadeVendida, Double valorImposto, Double precoVenda, Double precoCusto) {
-		if(parseID == null) {parseID = 0;}
+	public Produto(String descricao, Double precoCusto, int quantidadeTotalAdquirida) {
+		if (parseID == null) {
+			parseID = 0;
+		}
 		this.ID = ++parseID;
 		this.descricao = descricao;
 		this.quantidadeEstoque = 0;
-		this.quantidadeTotalComprada = 0;
-		this.quantidadeTotalVendas = quantidadeVendida;
+		this.quantidadeTotalComprada = quantidadeComprada(quantidadeTotalAdquirida);
+		this.quantidadeTotalVendas = 0;
 		this.valorTotalVendas = 0.0;
-		this.valorCompra = valorCompra;
+		this.valorCompra = 0.0;
 		this.valorImposto = 0.0;
 		this.precoVenda = 0.0;
 		this.precoCusto = precoCusto;
 	}
-	//#endregion
-	
+	// #endregion
+
 	/********************
-		Metodos
-	********************/
-	
-	/**GETS**/
+	 * Metodos
+	 ********************/
+
+	// #region GETS
 	public Integer getID() {
 		return this.ID;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -93,21 +84,30 @@ public class Produto {
 	public int getQuantidadeVendidas() {
 		return quantidadeTotalVendas;
 	}
-	
-	public Double getValorImposto(){
+
+	public Double getValorImposto() {
 		return valorImposto;
 	}
 
-	public Double getPrecoVenda(){
+	public Double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public Double getValorTotalVendas(){
-		return valorTotalVendas;
+	public Double getPrecoCusto() {
+		return precoCusto;
 	}
 
-	/**SETS**/
+	public Double getValorTotalVendas() {
+		return valorTotalVendas;
+	}
+	// #endregion
+
+	// #region SETS
 	public void setDescricao(String descricao) {
+		Logger logger = Logger.getLogger(Produto.class.getName());
+		if (descricao.length() < 3) {
+			logger.log(Level.SEVERE, "A descrição deve possuir no mínimo 3 caracteres");
+		}
 		this.descricao = descricao;
 	}
 
@@ -119,60 +119,81 @@ public class Produto {
 		this.quantidadeTotalVendas = quantidadeTotalVendas;
 	}
 
-	public void setValorImposto(){
+	public void setValorImposto(Double valorImposto) {
 		this.valorImposto = valorImposto;
 	}
 
-	public void setPrecoVenda(Double precoVenda){
+	public void setPrecoVenda(Double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
 
-	public void setValorTotalVendas(){
+	public void setValorTotalVendas() {
 		this.valorTotalVendas = CalculaValorArrecadado.calculaValorArrecadado(getPrecoVenda(), getQuantidadeVendidas());
 	}
 
-	public void setQuantidadeEstoque(int quantidadeEstoque){
+	public void setQuantidadeEstoque(int quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
+	// endregion
+
 	/**
 	 * Realizar vendas
-	 * @param totalVendas quantidade vendida
+	 * 
+	 * @param quantidadeProdutosVendidos quantidade vendida
 	 */
-	public void venda(int venda) {
-		this.quantidadeTotalVendas += venda;
-	}
-	
-	private boolean verificaEstoque() {
-		return quantidadeEstoque<10? false:true;
+	public void quantidadeVendida(int quantidadeProdutosVendidos) {
+		this.quantidadeTotalVendas += quantidadeProdutosVendidos;
 	}
 
-	/*Calcular Imposto*/
-	public Double calcularImposto(Double valorCompra ){ //após calcular o lucro, terminar aqui
-		valorImposto = 0.18*(valorCompra);
+	/**
+	 * Calcula a quantidade total de produtos comprados pela mercearia
+	 * 
+	 * @param quantidadeProdutosComprados (quantidade total de produtos adquiridos)
+	 */
+	public int quantidadeComprada(int quantidadeProdutosComprados) {
+		return quantidadeTotalComprada += quantidadeProdutosComprados;
+	}
+
+	private boolean verificaEstoque() {
+		return quantidadeEstoque < 10 ? false : true;
+	}
+
+	/* Calcular Imposto */
+	public Double calcularImposto(Double valorCompra, Double margemLucro) { // após calcular o lucro, terminar aqui
+		valorImposto = 0.18 * (valorCompra + margemLucro);
 		return valorImposto;
 	}
 
-	/*Calcular preco de venda*/
-	public Double calcularPrecoDeVenda(Double valorCompra, Double valorImposto){ //após calcular o lucro, terminar aqui
-		precoVenda = valorCompra + calcularImposto(valorCompra);
+	/* Calcular preco de venda */
+	public Double calcularPrecoDeVenda(Double valorCompra, Double margemLucro) { // após calcular o lucro, terminar 																		// qui
+		precoVenda = valorCompra + calcularImposto(valorCompra, margemLucro) + margemLucro;
 		return precoVenda;
 	}
 
-	public void adicionaEstoque(int quantidadeProdutoComprada){
+	/**
+	 * Adicionar itens no estoque após compra de novos produtos
+	 * 
+	 * @param quantidadeProdutosComprados
+	 */
+	public void adicionaEstoque(int quantidadeProdutosComprados) {
 		int quantidadeAtualEmEstoque = getQuantidade();
-		setQuantidadeEstoque(quantidadeAtualEmEstoque + quantidadeProdutoComprada);
+		setQuantidadeEstoque(quantidadeAtualEmEstoque + quantidadeProdutosComprados);
 	}
 
-	public void removeEstoque(int quantidadeProdutoVendida){
+	/**
+	 * Remove itens do estoque após realizar venda de produtos
+	 * 
+	 * @param quantidadeProdutosVendidos
+	 */
+	public void removeEstoque(int quantidadeProdutosVendidos) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
 
 		int quantidadeAtualEmEstoque = getQuantidade();
 
-		if(quantidadeAtualEmEstoque >= quantidadeProdutoVendida){
-			setQuantidadeEstoque(quantidadeAtualEmEstoque - quantidadeProdutoVendida);
-		}
-		else{
+		if (quantidadeAtualEmEstoque < quantidadeProdutosVendidos) {
 			logger.log(Level.SEVERE, "A quantidade atual em estoque é inferior a quantidade desejada");
+
+			setQuantidadeEstoque(quantidadeAtualEmEstoque - quantidadeProdutosVendidos);
 		}
 	}
 }
