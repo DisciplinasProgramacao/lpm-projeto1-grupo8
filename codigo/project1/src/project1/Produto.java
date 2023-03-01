@@ -127,7 +127,7 @@ public class Produto {
 	 * 
 	 * @param quantidadeProdutosVendidos quantidade vendida
 	 */
-	public void venda(int quantidadeProdutosVendidos) {
+	public void efetuarVenda(int quantidadeProdutosVendidos) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
 		if (quantidadeProdutosVendidos > 0) {
 			if(this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
@@ -151,7 +151,7 @@ public class Produto {
 	 * 
 	 * @param quantidadeProdutosComprados (quantidade total de produtos adquiridos)
 	 */
-	public void compra(int quantidadeProdutosComprados) {
+	public void efetuarCompra(int quantidadeProdutosComprados) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
 		if(this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
 			adicionarEstoque(quantidadeProdutosComprados);
