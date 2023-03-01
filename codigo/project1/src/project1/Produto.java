@@ -30,14 +30,14 @@ public class Produto {
 
 	// #region CONSTRUTORES
 	public Produto() {
-		init("", 10, 0, 0, 0, 0, 0);
+		init("", 10, 0, 0, 0, 0);
 	}
 
 	/**
 	 * @param descricao nome/descricao
 	 */
-	public Produto(String descricao, double precoCusto, double margemLucro, int quantidadeTotalAdquirida) {
-		init(descricao, quantidadeTotalAdquirida, 0, 0, 0, margemLucro, precoCusto);
+	public Produto(String descricao, double valorCompra, double margemLucro, int quantidadeTotalAdquirida) {
+		init(descricao, quantidadeTotalAdquirida, 0, 0, valorCompra, margemLucro);
 	}
 	// #endregion
 
@@ -97,7 +97,7 @@ public class Produto {
 	}
 
 	public void setCusto(double valorCompra) {
-		this.valorCompra = valorCompra;
+		this.precoCusto = valorCompra;
 	}
 
 	//alterar
@@ -107,7 +107,7 @@ public class Produto {
 
 	// endregion
 	
-	private void init(String descricao, int quantidadeTotalAdquirida, int quantidadeTotalVendas, double valorTotalVendas, double valorCompra, double margemLucro, double precoCusto) {
+	private void init(String descricao, int quantidadeTotalAdquirida, int quantidadeTotalVendas, double valorTotalVendas, double valorCompra, double margemLucro) {
 		this.ID = ++parseID;
 		setDescricao(descricao);
 		this.quantidadeEstoque = 0;
@@ -115,10 +115,10 @@ public class Produto {
 		compra(quantidadeTotalAdquirida);
 		this.quantidadeTotalVendas = quantidadeTotalVendas;
 		this.valorTotalVendas = valorTotalVendas;
-		this.valorCompra = valorCompra;
+		this.valorCompra = calcularValorAquisicao(valorCompra);
 		calcularMargemLucro(margemLucro);
 		calcularPrecoDeVenda();
-		this.precoCusto = precoCusto;
+		this.precoCusto = valorCompra;
 		
 	}
 	
@@ -167,6 +167,10 @@ public class Produto {
 	 */
 	private double calcularImposto() { // após calcular o lucro, terminar aqui
 		return valorImposto * (valorCompra + margemLucro);
+	}
+
+	private double calcularValorAquisicao(double valorCompra) { 
+		return valorCompra * this.quantidadeTotalComprada;
 	}
 
 	private double calcularPrecoDeVenda() { 																		// qui
