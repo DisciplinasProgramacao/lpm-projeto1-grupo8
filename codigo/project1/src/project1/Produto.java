@@ -109,7 +109,7 @@ public class Produto {
 	
 	private void init(String descricao, int quantidadeTotalAdquirida, int quantidadeTotalVendas, double valorTotalVendas, double valorCompra, double margemLucro, double precoCusto) {
 		this.ID = ++parseID;
-		this.descricao = descricao;
+		setDescricao(descricao);
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		compra(quantidadeTotalAdquirida);
