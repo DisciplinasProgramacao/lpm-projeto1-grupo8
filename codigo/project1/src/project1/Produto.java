@@ -10,9 +10,9 @@ import java.util.logging.Level;
  */
 public class Produto {
 	// #region ATRIBUTOS
-	private static Integer parseID;
-	private Integer ID;
-	private String descricao; // Deve possuir um mínimo de 3 caracteres
+	private static int parseID;
+	private int ID;
+	protected String descricao; // Deve possuir um mínimo de 3 caracteres
 	private int quantidadeEstoque; // Quantidade mínima de cada produto = 10 itens
 	private int quantidadeTotalComprada;
 	private int quantidadeTotalVendas;
@@ -21,13 +21,13 @@ public class Produto {
 	private Double valorImposto;
 	private Double precoVenda;
 	private Double precoCusto;
+	static {
+		parseID = 0;
+	}
 	// #endregion
 
 	// #region CONSTRUTORES
 	public Produto() {
-		if (parseID == null) {
-			parseID = 0;
-		}
 		this.ID = ++parseID;
 		this.descricao = "";
 		this.quantidadeEstoque = 0;
@@ -44,9 +44,6 @@ public class Produto {
 	 * @param descricao nome/descricao
 	 */
 	public Produto(String descricao, Double precoCusto, int quantidadeTotalAdquirida) {
-		if (parseID == null) {
-			parseID = 0;
-		}
 		this.ID = ++parseID;
 		this.descricao = descricao;
 		this.quantidadeEstoque = 0;
@@ -65,7 +62,7 @@ public class Produto {
 	 ********************/
 
 	// #region GETS
-	public Integer getID() {
+	public int getID() {
 		return this.ID;
 	}
 
