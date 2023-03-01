@@ -47,8 +47,8 @@ public class Mercearia {
 	 * @param descri��o descri��o do produto a ser adicionado
 	 */
 	//EM PROGRESSO
-	public void adicionarProduto(String descricao, Double precoCusto, int quantidadeTotalAdquirida) {
-		Produto produto = new Produto(descricao, precoCusto, quantidadeTotalAdquirida);
+	public void adicionarProduto(String descricao, double precoCusto, double margemLucro, int quantidadeTotalAdquirida) {
+		Produto produto = new Produto(descricao, precoCusto, margemLucro, quantidadeTotalAdquirida);
 		this.listaProdutos.inserirFim(produto);
 	}
 
