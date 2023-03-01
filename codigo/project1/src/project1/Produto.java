@@ -17,7 +17,7 @@ public class Produto {
 	private int quantidadeTotalComprada;
 	private int quantidadeTotalVendas;
 	private double valorTotalVendas;
-	private double valorCompra;
+	private double valorTotalCompra;
 	private static double valorImposto;
 	private double margemLucro;
 	private double precoVenda;
@@ -29,15 +29,16 @@ public class Produto {
 	// #endregion
 
 	// #region CONSTRUTORES
+	
 	public Produto() {
-		init("", 10, 0, 0, 0, 0);
+		init("", 0, 0, 0);
 	}
 
 	/**
 	 * @param descricao nome/descricao
 	 */
-	public Produto(String descricao, double valorCompra, double margemLucro, int quantidadeTotalAdquirida) {
-		init(descricao, quantidadeTotalAdquirida, 0, 0, valorCompra, margemLucro);
+	public Produto(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
+		init(descricao, quantidadeTotalAdquirida, precoCusto, margemLucro);
 	}
 	// #endregion
 
@@ -58,8 +59,8 @@ public class Produto {
 		return quantidadeEstoque;
 	}
 
-	public double getValorCompra() {
-		return valorCompra;
+	public double getvalorTotalCompra() {
+		return valorTotalCompra;
 	}
 
 	public int getQuantidadeVendidas() {
@@ -96,8 +97,8 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public void setCusto(double valorCompra) {
-		this.precoCusto = valorCompra;
+	public void setCusto(double precoCusto) {
+		this.precoCusto = precoCusto;
 	}
 
 	//alterar
@@ -107,18 +108,19 @@ public class Produto {
 
 	// endregion
 	
-	private void init(String descricao, int quantidadeTotalAdquirida, int quantidadeTotalVendas, double valorTotalVendas, double valorCompra, double margemLucro) {
+	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
 		this.ID = ++parseID;
 		setDescricao(descricao);
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
-		compra(quantidadeTotalAdquirida);
-		this.quantidadeTotalVendas = quantidadeTotalVendas;
-		this.valorTotalVendas = valorTotalVendas;
-		this.valorCompra = calcularValorAquisicao(valorCompra);
-		calcularMargemLucro(margemLucro);
-		calcularPrecoDeVenda();
-		this.precoCusto = valorCompra;
+		this.quantidadeTotalVendas = 0;
+		this.valorTotalVendas = 0;
+		this.valorTotalCompra = 0;
+		this.precoCusto = precoCusto;
+		if(quantidadeTotalAdquirida >=10)
+			efetuarCompra(quantidadeTotalAdquirida);
+		this.margemLucro = calcularMargemLucro(margemLucro);
+		this.precoVenda = calcularPrecoDeVendaUnitario(precoCusto);
 	}
 	
 	/**
@@ -154,14 +156,15 @@ public class Produto {
 		Logger logger = Logger.getLogger(Produto.class.getName());
 		if(this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
 			adicionarEstoque(quantidadeProdutosComprados);
+			this.valorTotalCompra = calcularValorAquisicao(quantidadeProdutosComprados);
 		}else {
 			logger.log(Level.SEVERE, "Estoque minimo insuficiente");
 		}
 	}
 
 		
-	private double calcularValorAquisicao(double valorCompra) { 
-		return valorCompra * this.quantidadeTotalComprada;
+	private double calcularValorAquisicao(int quantidade) { 
+		return this.precoCusto * quantidade;
 	}
 
 	
@@ -170,16 +173,15 @@ public class Produto {
 	 * 
 	 * @param porcentagem deve ser informado como exemplo calcularMargemLucro(30), para 30%
 	 */
-	private void calcularMargemLucro(double porcentagem) { 
+	private double calcularMargemLucro(double porcentagem) { 
 		Logger logger = Logger.getLogger(Produto.class.getName());
 		porcentagem /= 100;
 		if(porcentagem >= 0.3 && porcentagem <= 0.8) {
-			this.margemLucro = this.precoCusto * porcentagem;
+			return this.precoCusto * porcentagem;
 		}else {
-			this.margemLucro = this.precoCusto * 0.3;
-			logger.log(Level.SEVERE, "Porcentagem da margem de lucro incorreta");
+			logger.log(Level.WARNING, "Porcentagem da margem de lucro incorreta, setando como 30%");
+			return this.precoCusto * 0.3;
 		}
-		
 	}
 
 
@@ -189,7 +191,7 @@ public class Produto {
 	 * @return imposto sobre valor do produto
 	 */
 	private double calcularImposto() { 
-		return valorImposto * (valorCompra + margemLucro);
+		return valorImposto * (precoCusto + margemLucro);
 	}
 
 	/**
@@ -197,8 +199,8 @@ public class Produto {
 	 * 
 	 * @return preço de venda do produto
 	 */
-	private double calcularPrecoDeVenda() { 											
-		return valorCompra + calcularImposto() + margemLucro;
+	private double calcularPrecoDeVendaUnitario(double custo) { 											
+		return custo + calcularImposto() + margemLucro;
 	}
 
 	/**
