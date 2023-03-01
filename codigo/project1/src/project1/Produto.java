@@ -119,7 +119,6 @@ public class Produto {
 		calcularMargemLucro(margemLucro);
 		calcularPrecoDeVenda();
 		this.precoCusto = valorCompra;
-		
 	}
 	
 	/**
@@ -160,22 +159,11 @@ public class Produto {
 		}
 	}
 
-	/**
-	 * Calcular valor do imposto sobre o produto
-	 * 
-	 * @return imposto sobre valor do produto
-	 */
-	private double calcularImposto() { // após calcular o lucro, terminar aqui
-		return valorImposto * (valorCompra + margemLucro);
-	}
-
+		
 	private double calcularValorAquisicao(double valorCompra) { 
 		return valorCompra * this.quantidadeTotalComprada;
 	}
 
-	private double calcularPrecoDeVenda() { 																		// qui
-		return valorCompra + calcularImposto() + margemLucro;
-	}
 	
 	/**
 	 * Calcular margem de lucro
@@ -192,6 +180,25 @@ public class Produto {
 			logger.log(Level.SEVERE, "Porcentagem da margem de lucro incorreta");
 		}
 		
+	}
+
+
+	/**
+	 * Calcular imposto sobre o produto
+	 * 
+	 * @return imposto sobre valor do produto
+	 */
+	private double calcularImposto() { 
+		return valorImposto * (valorCompra + margemLucro);
+	}
+
+	/**
+	 * Calcular preço de venda de um produto 
+	 * 
+	 * @return preço de venda do produto
+	 */
+	private double calcularPrecoDeVenda() { 											
+		return valorCompra + calcularImposto() + margemLucro;
 	}
 
 	/**
