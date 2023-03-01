@@ -26,14 +26,13 @@ public class Celula {
 	}
 	
 	public Celula() {
-		
 		item = new Produto();
 		proximo = null;
 		anterior = null;
 	}
 	
 	/********************
-		Métodos
+		Mï¿½todos
 	********************/
 	
 	public Produto getItem() {

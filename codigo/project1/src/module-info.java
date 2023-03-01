@@ -6,4 +6,5 @@
  *
  */
 module project1 {
+    requires java.logging;
 }

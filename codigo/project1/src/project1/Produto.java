@@ -3,49 +3,40 @@
  */
 package project1;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * @author grupo8
  * @version 0.1
  *
  */
-public class Produto {
-	
-	/********************
-		Atributos
-	********************/
-	
+public class Produto {	
+	//#region ATRIBUTOS
 	private static Integer parseID;
-	
+
 	private Integer ID;
 	
-	//descricao do produto, deve possuir um mínimo de 3 caracteres, descricao.lenght >= 3 ?
-	private String descricao;
+	private String descricao; //Deve possuir um mínimo de 3 caracteres
 	
-	//registrar qtd em estoque, quantidade minima de cada produto � 10 itens.
-	private int quantidadeEstoque;
+	private int quantidadeEstoque; //Quantidade mínima de cada produto = 10 itens
 	
-	//registrar qtd total comprada, poderia ser qtdTotalVendas + qtdEstoque, mas pode ter perda de estoque futuramente.
 	private int quantidadeTotalComprada;
 	
-	//registrar quantidade total do produto vendidas.
 	private int quantidadeTotalVendas;
 	
-	//registrar valor bruto em dinheiro de vendas.
 	private Double valorTotalVendas;
 
-	//registrar valor bruto de compra
 	private Double valorCompra;
 	
-	//registrar o valor do imposto
 	private Double valorImposto;
 
-	//registrar o valor do preco de venda
 	private Double precoVenda;
-	
-	/********************
-		Contrutores
-	********************/
-	
+
+	private Double precoCusto;
+	//#endregion
+
+	//#region CONSTRUTORES	
 	public Produto() {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
@@ -57,12 +48,13 @@ public class Produto {
 		this.valorCompra = 0.0;
 		this.valorImposto = 0.0;
 		this.precoVenda = 0.0;
+		this.precoCusto = 0.0;
 	}
 	
 	/**
 	 * @param descricao nome/descricao
 	 */
-	public Produto(String descricao, Double valorCompra, int quantidadeVendida, Double valorImposto, Double precoVenda) {
+	public Produto(String descricao, Double valorCompra, int quantidadeVendida, Double valorImposto, Double precoVenda, Double precoCusto) {
 		if(parseID == null) {parseID = 0;}
 		this.ID = ++parseID;
 		this.descricao = descricao;
@@ -73,7 +65,9 @@ public class Produto {
 		this.valorCompra = valorCompra;
 		this.valorImposto = 0.0;
 		this.precoVenda = 0.0;
+		this.precoCusto = precoCusto;
 	}
+	//#endregion
 	
 	/********************
 		Metodos
@@ -136,6 +130,10 @@ public class Produto {
 	public void setValorTotalVendas(){
 		this.valorTotalVendas = CalculaValorArrecadado.calculaValorArrecadado(getPrecoVenda(), getQuantidadeVendidas());
 	}
+
+	public void setQuantidadeEstoque(int quantidadeEstoque){
+		this.quantidadeEstoque = quantidadeEstoque;
+	}
 	/**
 	 * Realizar vendas
 	 * @param totalVendas quantidade vendida
@@ -158,5 +156,23 @@ public class Produto {
 	public Double calcularPrecoDeVenda(Double valorCompra, Double valorImposto){ //após calcular o lucro, terminar aqui
 		precoVenda = valorCompra + calcularImposto(valorCompra);
 		return precoVenda;
+	}
+
+	public void adicionaEstoque(int quantidadeProdutoComprada){
+		int quantidadeAtualEmEstoque = getQuantidade();
+		setQuantidadeEstoque(quantidadeAtualEmEstoque + quantidadeProdutoComprada);
+	}
+
+	public void removeEstoque(int quantidadeProdutoVendida){
+		Logger logger = Logger.getLogger(Produto.class.getName());
+
+		int quantidadeAtualEmEstoque = getQuantidade();
+
+		if(quantidadeAtualEmEstoque >= quantidadeProdutoVendida){
+			setQuantidadeEstoque(quantidadeAtualEmEstoque - quantidadeProdutoVendida);
+		}
+		else{
+			logger.log(Level.SEVERE, "A quantidade atual em estoque é inferior a quantidade desejada");
+		}
 	}
 }
