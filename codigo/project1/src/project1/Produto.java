@@ -110,7 +110,8 @@ public class Produto {
 	
 	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
 		this.ID = ++parseID;
-		setDescricao(descricao);
+		if(descricao != "")
+			setDescricao(descricao);
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
@@ -179,7 +180,7 @@ public class Produto {
 		if(porcentagem >= 0.3 && porcentagem <= 0.8) {
 			return this.precoCusto * porcentagem;
 		}else {
-			logger.log(Level.WARNING, "Porcentagem da margem de lucro incorreta, setando como 30%");
+			//logger.log(Level.WARNING, "Porcentagem da margem de lucro incorreta, setando como 30%");
 			return this.precoCusto * 0.3;
 		}
 	}
