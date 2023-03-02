@@ -55,10 +55,6 @@ public class Produto {
 		return descricao;
 	}
 
-	public int getQuantidade() {
-		return quantidadeEstoque;
-	}
-
 	public double getvalorTotalCompra() {
 		return valorTotalCompra;
 	}
@@ -69,10 +65,6 @@ public class Produto {
 	
 	public int getQuantidadeComprada() {
 		return quantidadeTotalComprada;
-	}
-
-	public double getValorImposto() {
-		return valorImposto;
 	}
 
 	public double getPrecoVenda() {
