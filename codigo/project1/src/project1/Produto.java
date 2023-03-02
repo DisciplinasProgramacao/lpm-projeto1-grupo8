@@ -50,38 +50,18 @@ public class Produto {
 	public int getID() {
 		return this.ID;
 	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public double getvalorTotalCompra() {
-		return valorTotalCompra;
-	}
-
 	public int getQuantidadeVendidas() {
 		return quantidadeTotalVendas;
-	}
-	
-	public int getQuantidadeComprada() {
-		return quantidadeTotalComprada;
 	}
 
 	public double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public double getPrecoCusto() {
-		return precoCusto;
-	}
-
-	public double getValorTotalVendas() {
-		return valorTotalVendas;
-	}
 	// #endregion
 
 	// #region SETS
-	public void setDescricao(String descricao) {
+	public void alterarDescricao(String descricao) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
 		if (descricao.length() < 3) {
 			logger.log(Level.SEVERE, "A descrição deve possuir no mínimo 3 caracteres");
@@ -92,18 +72,12 @@ public class Produto {
 	public void setCusto(double precoCusto) {
 		this.precoCusto = precoCusto;
 	}
-
-	//alterar
-	public void setValorTotalVendas() {
-		this.valorTotalVendas = CalculaValorArrecadado.calculaValorArrecadado(getPrecoVenda(), getQuantidadeVendidas());
-	}
-
 	// endregion
 	
 	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
 		this.ID = ++parseID;
 		if(descricao != "")
-			setDescricao(descricao);
+			alterarDescricao(descricao);
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
@@ -116,6 +90,10 @@ public class Produto {
 			efetuarCompra(quantidadeTotalAdquirida);
 	}
 	
+	public void calcularValorArrecadado(){
+        this.valorTotalVendas = precoCusto * quantidadeTotalVendas;
+    }
+
 	/**
 	 * Realizar vendas
 	 * 
