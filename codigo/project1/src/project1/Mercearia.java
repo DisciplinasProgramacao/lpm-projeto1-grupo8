@@ -43,8 +43,8 @@ public class Mercearia {
 		this.nome = nome;
 	}
 
-		/**
-	 * @param descri��o descri��o do produto a ser adicionado
+	/**
+	 * @param descricaoo do produto a ser adicionado
 	 */
 	//EM PROGRESSO
 	public void adicionarProduto(String descricao, double precoCusto, double margemLucro, int quantidadeTotalAdquirida) {
