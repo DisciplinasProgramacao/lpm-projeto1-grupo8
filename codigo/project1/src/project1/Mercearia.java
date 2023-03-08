@@ -44,7 +44,7 @@ public class Mercearia {
 	}
 
 	/**
-	 * @param descricaoo do produto a ser adicionado
+	 * @param descricao do produto a ser adicionado
 	 */
 	//EM PROGRESSO
 	public void adicionarProduto(String descricao, double precoCusto, double margemLucro, int quantidadeTotalAdquirida) {

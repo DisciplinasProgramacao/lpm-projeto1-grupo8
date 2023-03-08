@@ -5,22 +5,41 @@ package project1;
 
 public class ListaEncadeada {
 
-private Celula primeira;
-private Celula ultimo;
+	// #region ATRIBUTOS	
+	private Celula primeira;
+	private Celula ultimo;
+	// endregion 
 
-public ListaEncadeada() {
+
+	// #region CONSTRUTOR
+	public ListaEncadeada() {
 		Celula sentinela;
 		sentinela = new Celula();
 		primeira = sentinela;
 		ultimo = sentinela;
 	}
+	// endregion 
 
+
+	// #region METODOS	
+
+	/**
+	 * Insere novo produto da lista 
+	 * 
+	 * @param produtoNovo
+	 */
 	public void inserir(Produto produtoNovo) {
 		Celula novaCelula = new Celula(produtoNovo);
 		ultimo.setProximo(novaCelula);
 		this.ultimo = novaCelula;
 	}
 
+
+	/**
+	 * Verifica se o produto esta no estoque pelo seu ID
+	 * 
+	 * @return produto
+	 */
 	public Produto getProdutoPorID(int ID) throws Exception {
 		Celula celulaEncontrada;
 		if (! listaVazia()) {
@@ -37,6 +56,12 @@ public ListaEncadeada() {
 			throw new NullPointerException("Não foi possível encontrar o item na lista: a lista está vazia!");
 	}
 	
+
+	/**
+	 * Calcula a quantidade de produtos existentes no estoque
+	 * 
+	 * @return quantidade de produtos
+	 */
 	public int quantidadeProdutosEstoque() {
 		int contador = 0;
 		Celula celulaAux = primeira.getProximo();
@@ -47,10 +72,16 @@ public ListaEncadeada() {
 		return contador;
 	}
 	
+	//Confere se a lista esta vazia
 	private boolean listaVazia() {
 		return ultimo == primeira ? true : false; 
 	}
 
+	/**
+	 * Remove produto do estoque
+	 * 
+	 * @param produto
+	 */
 	public void remover(Produto produto) {
 		Celula celulaRemovida = null, celulaAux = this.primeira;
 			while(celulaAux != null) {
@@ -69,6 +100,11 @@ public ListaEncadeada() {
 			celulaRemovida.setProximo(null);
 	}
 
+	/**
+	 * Verifica a quantidade de produtos abaixo do estoque mínimo
+	 * 
+	 * @return quantidade de produtos abaixo min
+	 */
 	public String produtosAbaixoMinimoEstoque() {
 		Celula celulaAux = this.primeira.getProximo();
 		String contador = "";
@@ -84,6 +120,11 @@ public ListaEncadeada() {
 		return contador;
 	}
 
+	/**
+	 * Calcula o valor total em $$ dos produtos no estoque
+	 * 
+	 * @return total
+	 */
 	public double valorTotalEstoque() {
 			
 		Celula celulaAux = this.primeira.getProximo();
@@ -96,11 +137,6 @@ public ListaEncadeada() {
 		}
 		return total;
 	}
-	
-	
-	
-	
-	
-	
-	
+		
+	//#endregion
 }
