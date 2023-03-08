@@ -9,10 +9,13 @@ package project1;
  */
 public class Celula {
 
-
+	// #region ATRIBUTOS	
 	private Produto item;
 	private Celula proximo;
+	// endregion 
 
+
+	// #region CONSTRUTOR
 	public Celula(Produto novo) {
 		item = novo;
 		proximo = null;
@@ -22,7 +25,10 @@ public class Celula {
 		item = new Produto();
 		proximo = null;
 	}
+	// endregion 
 
+
+	// #region GET e SET 
 	public Produto getItem() {
 		return item;
 	}
@@ -36,4 +42,5 @@ public class Celula {
 	public void setProximo(Celula proximo) {
 		this.proximo = proximo;
 	}
+	// endregion 
 }
