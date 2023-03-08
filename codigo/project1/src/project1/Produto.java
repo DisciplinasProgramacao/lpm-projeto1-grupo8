@@ -19,7 +19,6 @@ public class Produto {
 	private double valorTotalVendas;
 	private double valorTotalCompra;
 	private static double valorImposto;
-	private double margemLucro;
 	private double precoVenda;
 	private double precoCusto;
 	static {
@@ -28,8 +27,36 @@ public class Produto {
 	}
 	// #endregion
 
+	// #region GETS
+	public int getID() {
+		return this.ID;
+	}
+
+	public int getQuantidadeVendidas() {
+		return quantidadeTotalVendas;
+	}
+
+	public double getPrecoVenda() {
+		return precoVenda;
+	}
+
+	// #endregion
+
 	// #region CONSTRUTORES
-	
+	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
+		this.ID = ++parseID;
+		alterarDescricao(descricao);
+		this.quantidadeEstoque = 0;
+		this.quantidadeTotalComprada = 0;
+		this.quantidadeTotalVendas = 0;
+		this.valorTotalVendas = 0;
+		this.valorTotalCompra = 0;
+		this.precoCusto = precoCusto;
+		this.precoVenda = calcularPrecoDeVendaUnitario(margemLucro);
+		if (quantidadeTotalAdquirida >= 10)
+			efetuarCompra(quantidadeTotalAdquirida);
+	}
+
 	public Produto() {
 		init("", 0, 0, 0);
 	}
@@ -42,57 +69,50 @@ public class Produto {
 	}
 	// #endregion
 
-	/********************
-	 * Metodos
-	 ********************/
-
-	// #region GETS
-	public int getID() {
-		return this.ID;
-	}
-	public int getQuantidadeVendidas() {
-		return quantidadeTotalVendas;
-	}
-
-	public double getPrecoVenda() {
-		return precoVenda;
-	}
-
-	// #endregion
-
-	// #region SETS
+	// #region Métodos
 	public void alterarDescricao(String descricao) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
-		if (descricao.length() < 3) {
-			logger.log(Level.SEVERE, "A descrição deve possuir no mínimo 3 caracteres");
+		if (descricao == null || descricao.length() < 3) {
+			logger.log(Level.SEVERE, "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
 		}
 		this.descricao = descricao;
 	}
 
-	public void setCusto(double precoCusto) {
-		this.precoCusto = precoCusto;
+	/**
+	 * Calcular preço de venda de um produto
+	 * 
+	 * @return preço de venda do produto
+	 */
+	private double calcularPrecoDeVendaUnitario(double porcentagemMargemLucro) {
+		double margemLucroCalculada = calcularMargemLucro(porcentagemMargemLucro);
+		return this.precoCusto + calcularImposto(margemLucroCalculada) + margemLucroCalculada;
 	}
-	// endregion
-	
-	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
-		this.ID = ++parseID;
-		if(descricao != "")
-			alterarDescricao(descricao);
-		this.quantidadeEstoque = 0;
-		this.quantidadeTotalComprada = 0;
-		this.quantidadeTotalVendas = 0;
-		this.valorTotalVendas = 0;
-		this.valorTotalCompra = 0;
-		this.precoCusto = precoCusto;
-		this.margemLucro = calcularMargemLucro(margemLucro);
-		this.precoVenda = calcularPrecoDeVendaUnitario(precoCusto);
-		if(quantidadeTotalAdquirida >=10)
-			efetuarCompra(quantidadeTotalAdquirida);
+
+	/**
+	 * Calcular margem de lucro
+	 * 
+	 * @param porcentagem deve ser informado como exemplo calcularMargemLucro(30), para 30%
+	 */
+	private double calcularMargemLucro(double porcentagem) {
+		Logger logger = Logger.getLogger(Produto.class.getName());
+		porcentagem /= 100;
+		if (porcentagem >= 0.3 && porcentagem <= 0.8) {
+			return this.precoCusto * porcentagem;
+		} else {
+			logger.log(Level.WARNING, "Porcentagem da margem de lucro incorreta, setando com o valor mínimo (30%)");
+			return this.precoCusto * 0.3;
+		}
 	}
-	
-	public void calcularValorArrecadado(){
-        this.valorTotalVendas = precoCusto * quantidadeTotalVendas;
-    }
+
+	/**
+	 * Calcular imposto sobre o produto
+	 * 
+	 * @return imposto sobre valor do produto
+	 */
+	private double calcularImposto(double margemLucro) {
+		valorImposto /= 100;
+		return valorImposto * (precoCusto + margemLucro);
+	}
 
 	/**
 	 * Realizar vendas
@@ -102,20 +122,39 @@ public class Produto {
 	public void efetuarVenda(int quantidadeProdutosVendidos) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
 		if (quantidadeProdutosVendidos > 0) {
-			if(this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
+			if (this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
 				logger.log(Level.SEVERE, "Estoque insuficiente");
-			}else {
-				if(this.quantidadeEstoque - quantidadeProdutosVendidos < 10) {
-					logger.log(Level.SEVERE, "Estoque abaixo do minimo");
+			} else {
+				if (estoqueAbaixoDoMinimo()) {
+					logger.log(Level.WARNING, "Estoque atual da mercearia abaixo do minimo");
 				}
 				removerEstoque(quantidadeProdutosVendidos);
 				this.quantidadeTotalVendas += quantidadeProdutosVendidos;
-				valorTotalVendas += (quantidadeProdutosVendidos * this.precoVenda);
+				this.valorTotalVendas += calcularValorArrecadado(quantidadeProdutosVendidos); //valor total arrecadado com as vendas
 			}
-		}else {
+		} else {
 			logger.log(Level.SEVERE, "Quantidade de vendas incorreto");
 		}
-		
+	}
+
+	private double calcularValorArrecadado(int quantidade) {
+		return this.precoVenda * quantidade;
+	}
+
+	// monitora se a qtdAtual em estoque está abaixo do mínimo
+	public boolean estoqueAbaixoDoMinimo() {
+		if (this.quantidadeEstoque < 10)
+			return true;
+		return false;
+	}
+
+	/**
+	 * Remove itens do estoque após realizar venda de produtos
+	 * 
+	 * @param quantidadeProdutosVendidos
+	 */
+	private void removerEstoque(int quantidadeProdutosVendidos) {
+		this.quantidadeEstoque -= quantidadeProdutosVendidos;
 	}
 
 	/**
@@ -125,53 +164,16 @@ public class Produto {
 	 */
 	public void efetuarCompra(int quantidadeProdutosComprados) {
 		Logger logger = Logger.getLogger(Produto.class.getName());
-		if(this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
+		if (this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
 			adicionarEstoque(quantidadeProdutosComprados);
-			this.valorTotalCompra = calcularValorAquisicao(quantidadeProdutosComprados);
-		}else {
-			logger.log(Level.SEVERE, "Estoque minimo insuficiente");
+			this.valorTotalCompra += calcularValorAquisicao(quantidadeProdutosComprados); //custos TOTAIS com a aquisição de um produto
+		} else {
+			logger.log(Level.SEVERE, "Estoque minimo insuficiente, deve ser comprado um número maior de itens para atingir o estoque mínimo");
 		}
 	}
 
-		
-	private double calcularValorAquisicao(int quantidade) { 
+	private double calcularValorAquisicao(int quantidade) {
 		return this.precoCusto * quantidade;
-	}
-
-	
-	/**
-	 * Calcular margem de lucro
-	 * 
-	 * @param porcentagem deve ser informado como exemplo calcularMargemLucro(30), para 30%
-	 */
-	private double calcularMargemLucro(double porcentagem) { 
-		Logger logger = Logger.getLogger(Produto.class.getName());
-		porcentagem /= 100;
-		if(porcentagem >= 0.3 && porcentagem <= 0.8) {
-			return this.precoCusto * porcentagem;
-		}else {
-			//logger.log(Level.WARNING, "Porcentagem da margem de lucro incorreta, setando como 30%");
-			return this.precoCusto * 0.3;
-		}
-	}
-
-
-	/**
-	 * Calcular imposto sobre o produto
-	 * 
-	 * @return imposto sobre valor do produto
-	 */
-	private double calcularImposto() { 
-		return valorImposto * (precoCusto + margemLucro);
-	}
-
-	/**
-	 * Calcular preço de venda de um produto 
-	 * 
-	 * @return preço de venda do produto
-	 */
-	private double calcularPrecoDeVendaUnitario(double custo) { 											
-		return custo + calcularImposto() + margemLucro;
 	}
 
 	/**
@@ -183,13 +185,5 @@ public class Produto {
 		this.quantidadeEstoque += quantidadeProdutosComprados;
 		this.quantidadeTotalComprada += quantidadeProdutosComprados;
 	}
-
-	/**
-	 * Remove itens do estoque após realizar venda de produtos
-	 * 
-	 * @param quantidadeProdutosVendidos
-	 */
-	private void removerEstoque(int quantidadeProdutosVendidos) {
-		this.quantidadeEstoque -= quantidadeProdutosVendidos;
-	}
+	// #endregion
 }
