@@ -9,32 +9,20 @@ package project1;
  */
 public class Celula {
 
-	/********************
-		Atributos
-	********************/
+
 	private Produto item;
 	private Celula proximo;
-	private Celula anterior;
-	
-	/********************
-		Contrutores
-	********************/
+
 	public Celula(Produto novo) {
 		item = novo;
 		proximo = null;
-		anterior = null;
 	}
 	
 	public Celula() {
 		item = new Produto();
 		proximo = null;
-		anterior = null;
 	}
-	
-	/********************
-		M�todos
-	********************/
-	
+
 	public Produto getItem() {
 		return item;
 	}
@@ -47,11 +35,5 @@ public class Celula {
 	}
 	public void setProximo(Celula proximo) {
 		this.proximo = proximo;
-	}
-	public Celula getAnterior() {
-		return anterior;
-	}
-	public void setAnterior(Celula anterior) {
-		this.anterior = anterior;
 	}
 }

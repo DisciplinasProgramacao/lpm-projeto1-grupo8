@@ -36,6 +36,14 @@ public class Produto {
 	public int getQuantidadeVendidas() {
 		return quantidadeTotalVendas;
 	}
+	
+	public int getQuantidadeEstoque() {
+		return quantidadeEstoque;
+	}
+	
+	public double getValorTotalEstoque() {
+		return precoCusto * quantidadeEstoque;
+	}
 
 	public double getPrecoVenda() {
 		return precoVenda;
@@ -49,7 +57,7 @@ public class Produto {
 
 	// #region CONSTRUTORES
 	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
-		this.ID = ++parseID;
+		this.ID = parseID++;
 		alterarDescricao(descricao);
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
@@ -57,13 +65,14 @@ public class Produto {
 		this.valorTotalVendas = 0;
 		this.valorTotalCompra = 0;
 		this.precoCusto = precoCusto;
-		this.precoVenda = calcularPrecoDeVendaUnitario(margemLucro);
+		if (margemLucro > 0)
+			this.precoVenda = calcularPrecoDeVendaUnitario(margemLucro);
 		if (quantidadeTotalAdquirida >= 10)
 			efetuarCompra(quantidadeTotalAdquirida);
 	}
 
 	public Produto() {
-		init("", 0, 0, 0);
+		init(null, 0, 0, 0);
 	}
 
 	/**
@@ -76,11 +85,18 @@ public class Produto {
 
 	// #region Métodos
 	public void alterarDescricao(String descricao) {
-		if (descricao == null || descricao.length() < 3) {
-			System.out.print("A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
-			//logger.log(Level.SEVERE, "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
+		if (descricao != null) {
+			if(descricao.length() < 3) {
+				System.out.print("A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
+				//logger.log(Level.SEVERE, "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
+			}
 		}
 		this.descricao = descricao;
+	}
+	
+	
+	public void alterarPrecoCusto(double precoCusto) {
+		this.precoCusto = precoCusto;
 	}
 
 	/**
@@ -170,7 +186,9 @@ public class Produto {
 			adicionarEstoque(quantidadeProdutosComprados);
 			this.valorTotalCompra += calcularValorAquisicao(quantidadeProdutosComprados); //custos TOTAIS com a aquisição de um produto
 		} else {
-			logger.log(Level.SEVERE, "Estoque minimo insuficiente, deve ser comprado um número maior de itens para atingir o estoque mínimo");
+			adicionarEstoque(quantidadeProdutosComprados);
+			this.valorTotalCompra += calcularValorAquisicao(quantidadeProdutosComprados);
+			logger.log(Level.INFO, "Estoque minimo insuficiente, deve ser comprado um numero maior de itens para atingir o estoque minimo");
 		}
 	}
 
