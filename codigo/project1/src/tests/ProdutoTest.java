@@ -2,6 +2,8 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
+import project1.Produto;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
@@ -31,7 +33,7 @@ public class ProdutoTest {
     @Test
     public void devePermitirDescricaoComMaisDeTresCaracteres(){
         produtoInicial.alterarDescricao("Maça");
-        assertEquals(produtoInicial.descricao, "Maça");
+        assertEquals(produtoInicial.getDescricao(), "Maça");
     }
 
     @Test

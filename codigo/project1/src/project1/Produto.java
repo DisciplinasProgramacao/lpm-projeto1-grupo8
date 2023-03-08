@@ -40,6 +40,10 @@ public class Produto {
 	public double getPrecoVenda() {
 		return precoVenda;
 	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
 
 	// #endregion
 
