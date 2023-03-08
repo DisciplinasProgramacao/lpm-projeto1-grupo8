@@ -15,14 +15,14 @@ public class Mercearia {
 	********************/
 	private String nome;
 	
-	private ListaDuplamenteEncadeada listaProdutos;
+	private ListaEncadeada listaProdutos;
 	
 	/********************
 		Contrutores
 	********************/
 	
 	Mercearia(){
-		 this.listaProdutos = new ListaDuplamenteEncadeada();
+		 this.listaProdutos = new ListaEncadeada();
 	}
 	
 	/********************
@@ -49,13 +49,13 @@ public class Mercearia {
 	//EM PROGRESSO
 	public void adicionarProduto(String descricao, double precoCusto, double margemLucro, int quantidadeTotalAdquirida) {
 		Produto produto = new Produto(descricao, quantidadeTotalAdquirida, precoCusto, margemLucro);
-		this.listaProdutos.inserirFim(produto);
+		this.listaProdutos.inserir(produto);
 	}
 
 	/**
 	 * @return lista duplamente encadeada com os produtos
 	 */
-	public ListaDuplamenteEncadeada getLista() {
+	public ListaEncadeada getLista() {
 		return this.listaProdutos;
 	}
 	

@@ -9,5 +9,10 @@ public class ListaEncadeada {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Produto getProdutoPorID(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

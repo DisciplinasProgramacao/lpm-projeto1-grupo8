@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tests;
+package project1.testes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,7 +37,7 @@ class ListaEncadeadaTest {
 */
 	@Test
 	void reporEstoque() {
-		produtoVazio.setDescricao("teste");
+		produtoVazio.alterarDescricao("teste");
 		listaVazia.inserir(produtoVazio);
 		assertEquals("teste", listaVazia.getProdutoPorID(0).getDescricao());
 	}
@@ -45,11 +45,11 @@ class ListaEncadeadaTest {
 	@Test
 	void reporEstoqueMaisQuantidade() {
 		for(int i = 0;i<10;i++) {
-			produtoVazio.setDescricao("teste");
+			produtoVazio.alterarDescricao("teste");
 			listaVazia.inserir(produtoVazio);
 		}
 		Produto produtoTeste2 = new Produto();
-		produtoTeste2.setDescricao("teste2");
+		produtoTeste2.alterarDescricao("teste2");
 		listaVazia.inserir(produtoTeste2);
 		assertEquals("teste2", listaVazia.getProdutoPorID(10).getDescricao());
 	}
