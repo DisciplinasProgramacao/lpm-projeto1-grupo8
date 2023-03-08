@@ -83,7 +83,14 @@ public class Produto {
 	}
 	// #endregion
 
+
 	// #region Métodos
+
+	/**
+	 * Altera a descrição de um produto 
+	 * 
+	 * @param descricao 
+	 */
 	public void alterarDescricao(String descricao) {
 		if (descricao != null) {
 			if(descricao.length() < 3) {
@@ -112,7 +119,7 @@ public class Produto {
 	/**
 	 * Calcular margem de lucro
 	 * 
-	 * @param porcentagem deve ser informado como exemplo calcularMargemLucro(30), para 30%
+	 * @param porcentagem deve ser informado, como exemplo calcularMargemLucro(30), para 30%
 	 */
 	private double calcularMargemLucro(double porcentagem) {
 		porcentagem /= 100;
@@ -156,6 +163,11 @@ public class Produto {
 		}
 	}
 
+	/**
+	 * Calcula o valor arrecadado a partir da quantiade de produtos e o preco de venda
+	 * 
+	 * @param quantidade
+	 */
 	private double calcularValorArrecadado(int quantidade) {
 		return this.precoVenda * quantidade;
 	}
