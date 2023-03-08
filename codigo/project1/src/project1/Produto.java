@@ -9,6 +9,7 @@ import java.util.logging.Level;
  *
  */
 public class Produto {
+    private final Logger logger = Logger.getLogger(Produto.class.getName());
 	// #region ATRIBUTOS
 	private static int parseID;
 	private int ID;
@@ -71,9 +72,9 @@ public class Produto {
 
 	// #region Métodos
 	public void alterarDescricao(String descricao) {
-		Logger logger = Logger.getLogger(Produto.class.getName());
 		if (descricao == null || descricao.length() < 3) {
-			logger.log(Level.SEVERE, "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
+			System.out.print("A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
+			//logger.log(Level.SEVERE, "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
 		}
 		this.descricao = descricao;
 	}
@@ -94,7 +95,6 @@ public class Produto {
 	 * @param porcentagem deve ser informado como exemplo calcularMargemLucro(30), para 30%
 	 */
 	private double calcularMargemLucro(double porcentagem) {
-		Logger logger = Logger.getLogger(Produto.class.getName());
 		porcentagem /= 100;
 		if (porcentagem >= 0.3 && porcentagem <= 0.8) {
 			return this.precoCusto * porcentagem;
@@ -120,7 +120,6 @@ public class Produto {
 	 * @param quantidadeProdutosVendidos quantidade vendida
 	 */
 	public void efetuarVenda(int quantidadeProdutosVendidos) {
-		Logger logger = Logger.getLogger(Produto.class.getName());
 		if (quantidadeProdutosVendidos > 0) {
 			if (this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
 				logger.log(Level.SEVERE, "Estoque insuficiente");
@@ -163,7 +162,6 @@ public class Produto {
 	 * @param quantidadeProdutosComprados (quantidade total de produtos adquiridos)
 	 */
 	public void efetuarCompra(int quantidadeProdutosComprados) {
-		Logger logger = Logger.getLogger(Produto.class.getName());
 		if (this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
 			adicionarEstoque(quantidadeProdutosComprados);
 			this.valorTotalCompra += calcularValorAquisicao(quantidadeProdutosComprados); //custos TOTAIS com a aquisição de um produto
