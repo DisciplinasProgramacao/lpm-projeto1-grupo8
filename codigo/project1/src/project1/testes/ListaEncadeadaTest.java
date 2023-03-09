@@ -38,17 +38,19 @@ class ListaEncadeadaTest {
 	� Repor o estoque (comprar) ou retirar do estoque (produtos e escolha do administrador)
 */
 
-	//Valida se o produto 1 foi inserido no estoque
+	//Valida se o produto um foi inserido no estoque
+	//4
 	@Test
-	void reporEstoque() throws Exception {
+	void deveInserirUmProdutoNoEstoqueREPOSICAO() throws Exception {
 		produtoVazio.alterarDescricao("teste");
 		listaVazia.inserir(produtoVazio);
 		assertEquals(produtoVazio.getDescricao(), listaVazia.getProdutoPorID(produtoVazio.getID()).getDescricao());
 	}
 	
-	//confere se varios produtos foram inseridos na lista de estoque
+	//Confere se varios produtos foram inseridos no estoque
+	//4
 	@Test
-	void reporEstoqueMaisQuantidade() throws Exception {
+	void deveInserirVariosProdutosNoEstoqueREPOSICAO() throws Exception {
 		for(int i = 0;i<10;i++) {
 			Produto produto = new Produto();
 			produto.alterarDescricao("teste" + i);
@@ -61,21 +63,22 @@ class ListaEncadeadaTest {
 	}
 	
 	//testa o metodo "qtdProdutoEstoque" inserindo 1 produto
+	//quantos produtos constam no estoque
 	@Test
-	void receberQuantidadeEmEstoque() {
+	void deveMostrarNoEstoqueUmProduto() {
 		listaVazia.inserir(produtoVazio);
 		assertEquals(1, listaVazia.quantidadeProdutosEstoque());
 	}
 	
 	//testa o metodo "qtdProdutoEstoque" inserindo 0 produto
 	@Test
-	void quantidadeZeradaEmEstoque() {
+	void deveMostrarNoEstoqueZeroProduto() {
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
 	}
 	
 	//testa o metodo "qtdProdutoEstoque" inserindo varios produto
 	@Test
-	void quantidadeAdicionandoSeisEstoque() {
+	void DeveMostrarNoEstoqueSeisProdutos() {
 		listaVazia.inserir(produtoVazio);
 		listaVazia.inserir(produtoVazio);
 		listaVazia.inserir(produtoVazio);
@@ -87,7 +90,7 @@ class ListaEncadeadaTest {
 	
 	//confere se a lista nao esta vazia 
 	@Test
-	void getComListaVazia() {
+	void confereListaVazia() {
 		ListaEncadeada lista = new ListaEncadeada();
 		Exception exception = assertThrows(Exception.class, () -> {
 			lista.getProdutoPorID(999999999);
@@ -100,15 +103,15 @@ class ListaEncadeadaTest {
 	
 	//confere se foi removido 0 produto
 	@Test 
-	void removerLista() {
+	void deveRemoverUmProdutoNoEstoque() {
 		listaVazia.inserir(produtoVazio);
 		listaVazia.remover(produtoVazio);
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
 	}
 	
-	//confere se foi removido varios produtos
+	//Confere se foi removido varios produtos da Lista
 	@Test 
-	void removerListaAdicionandoVarios() {
+	void deveValidarQtdDeProdutosAposRealizarCompra() {
 		Produto produtoTeste2 = new Produto();
 		listaVazia.inserir(produtoVazio);
 		listaVazia.inserir(produtoTeste2);
@@ -121,7 +124,7 @@ class ListaEncadeadaTest {
 	
 	//verifica o estoque com qtd abaixa do minimo
 	@Test
-	void quantidadeEstoqueMinimo() {
+	void deveMostrarQuantidadeEstoqueMinimo() {
 		produtoVazio.efetuarCompra(9);
 		produtoVazio.alterarDescricao("as");
 		listaVazia.inserir(produtoVazio);
@@ -131,7 +134,7 @@ class ListaEncadeadaTest {
 	
 	//verifica o estoque com qtd acima do minimo; ou seja nao vai gerar alerta
 	@Test
-	void quantidadeEstoqueMinimoAcimaDez() {
+	void devequantidadeEstoqueMinimoAcimaDez() {
 		produtoVazio.efetuarCompra(10);
 		produtoVazio.alterarDescricao("asa");
 		listaVazia.inserir(produtoVazio);
