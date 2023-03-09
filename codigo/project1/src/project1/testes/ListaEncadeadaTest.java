@@ -37,6 +37,8 @@ class ListaEncadeadaTest {
 	� Quais sao os produtos atuais com estoque abaixo do minimo.
 	� Repor o estoque (comprar) ou retirar do estoque (produtos e escolha do administrador)
 */
+
+	//Valida se o produto 1 foi inserido no estoque
 	@Test
 	void reporEstoque() throws Exception {
 		produtoVazio.alterarDescricao("teste");
@@ -44,6 +46,7 @@ class ListaEncadeadaTest {
 		assertEquals(produtoVazio.getDescricao(), listaVazia.getProdutoPorID(produtoVazio.getID()).getDescricao());
 	}
 	
+	//confere se varios produtos foram inseridos na lista de estoque
 	@Test
 	void reporEstoqueMaisQuantidade() throws Exception {
 		for(int i = 0;i<10;i++) {
@@ -57,17 +60,20 @@ class ListaEncadeadaTest {
 		assertEquals("testeZ", listaVazia.getProdutoPorID(produtoTeste2.getID()).getDescricao());
 	}
 	
+	//testa o metodo "qtdProdutoEstoque" inserindo 1 produto
 	@Test
 	void receberQuantidadeEmEstoque() {
 		listaVazia.inserir(produtoVazio);
 		assertEquals(1, listaVazia.quantidadeProdutosEstoque());
 	}
 	
+	//testa o metodo "qtdProdutoEstoque" inserindo 0 produto
 	@Test
 	void quantidadeZeradaEmEstoque() {
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
 	}
 	
+	//testa o metodo "qtdProdutoEstoque" inserindo varios produto
 	@Test
 	void quantidadeAdicionandoSeisEstoque() {
 		listaVazia.inserir(produtoVazio);
@@ -79,7 +85,7 @@ class ListaEncadeadaTest {
 		assertEquals(6, listaVazia.quantidadeProdutosEstoque());
 	}
 	
-	
+	//confere se a lista nao esta vazia 
 	@Test
 	void getComListaVazia() {
 		ListaEncadeada lista = new ListaEncadeada();
@@ -92,6 +98,7 @@ class ListaEncadeadaTest {
 		
 	}
 	
+	//confere se foi removido 0 produto
 	@Test 
 	void removerLista() {
 		listaVazia.inserir(produtoVazio);
@@ -99,6 +106,7 @@ class ListaEncadeadaTest {
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
 	}
 	
+	//confere se foi removido varios produtos
 	@Test 
 	void removerListaAdicionandoVarios() {
 		Produto produtoTeste2 = new Produto();
@@ -111,6 +119,7 @@ class ListaEncadeadaTest {
 		assertEquals(4, listaVazia.quantidadeProdutosEstoque());
 	}
 	
+	//verifica o estoque com qtd abaixa do minimo
 	@Test
 	void quantidadeEstoqueMinimo() {
 		produtoVazio.efetuarCompra(9);
@@ -120,6 +129,7 @@ class ListaEncadeadaTest {
 		
 	}
 	
+	//verifica o estoque com qtd acima do minimo; ou seja nao vai gerar alerta
 	@Test
 	void quantidadeEstoqueMinimoAcimaDez() {
 		produtoVazio.efetuarCompra(10);
@@ -129,6 +139,7 @@ class ListaEncadeadaTest {
 		
 	}
 	
+
 	@Test
 	void quantidadeVariosEstoqueMinimo() {
 		produtoVazio.alterarDescricao("asa");
@@ -150,7 +161,7 @@ class ListaEncadeadaTest {
 		listaVazia.inserir(produtoTeste4);
 		
 		
-		assertEquals("asa bsa dsa", listaVazia.produtosAbaixoMinimoEstoque());
+		assertEquals("asa bsa da", listaVazia.produtosAbaixoMinimoEstoque());
 	}
 	
 	@Test
