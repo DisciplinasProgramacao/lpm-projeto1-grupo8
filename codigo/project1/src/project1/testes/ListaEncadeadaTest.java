@@ -86,7 +86,7 @@ class ListaEncadeadaTest {
 		Exception exception = assertThrows(Exception.class, () -> {
 			lista.getProdutoPorID(999999999);
 	    });
-		String expectedMessage = "N�o foi poss�vel encontrar o item na lista: a lista est� vazia!";
+		String expectedMessage = "Não foi possível encontrar o item na lista: a lista está vazia!";
 
 		assertEquals(expectedMessage, exception.getMessage());
 		
