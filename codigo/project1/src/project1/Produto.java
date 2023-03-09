@@ -111,7 +111,7 @@ public class Produto {
 	 * 
 	 * @return preço de venda do produto
 	 */
-	private double calcularPrecoDeVendaUnitario(double porcentagemMargemLucro) {
+	public double calcularPrecoDeVendaUnitario(double porcentagemMargemLucro) {
 		double margemLucroCalculada = calcularMargemLucro(porcentagemMargemLucro);
 		return this.precoCusto + calcularImposto(margemLucroCalculada) + margemLucroCalculada;
 	}
