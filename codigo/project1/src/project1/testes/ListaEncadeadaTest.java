@@ -32,10 +32,10 @@ class ListaEncadeadaTest {
 	}
 
 /*
-	• Quantos produtos constam do estoque.
-	• Qual o valor total do estoque atual.
-	• Quais são os produtos atuais com estoque abaixo do mínimo.
-	• Repor o estoque (comprar) ou retirar do estoque (produtos à escolha do administrador)
+	ï¿½ Quantos produtos constam do estoque.
+	ï¿½ Qual o valor total do estoque atual.
+	ï¿½ Quais sao os produtos atuais com estoque abaixo do minimo.
+	ï¿½ Repor o estoque (comprar) ou retirar do estoque (produtos e escolha do administrador)
 */
 	@Test
 	void reporEstoque() throws Exception {
