@@ -41,4 +41,9 @@ public class ProdutoTest {
         produtoInicial.alterarDescricao("a");
         assertEquals(output.toString(), "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
     }
+
+    @Test
+    public void calcularPrecoDeVendaUnitario (){
+       
+    }
 }
