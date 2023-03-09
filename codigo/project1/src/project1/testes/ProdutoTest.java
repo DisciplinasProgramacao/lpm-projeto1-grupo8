@@ -22,7 +22,7 @@ public class ProdutoTest {
         PrintStream novoFluxoDeImpressao = new PrintStream(output, true, "UTF-8");
         System.setOut(novoFluxoDeImpressao);
 
-        produtoInicial = new Produto("Descrição", 10, 2, 30);
+        produtoInicial = new Produto("Descrição", 10, 10, 30);
     }
 
     @AfterEach
@@ -46,6 +46,7 @@ public class ProdutoTest {
 
     @Test
     public void calcularPrecoDeVendaUnitario (){
-       
+       assertEquals(produtoInicial.calcularPrecoDeVendaUnitario(35),"13.5" );
+        //Precisamos colocar um método para limitar o número de casas decimais
     }
 }
