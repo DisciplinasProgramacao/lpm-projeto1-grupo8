@@ -30,12 +30,14 @@ public class ProdutoTest {
         output.reset();
     }    
 
+    // Testa se a descricao possui mais que 3 caracteres
     @Test
     public void devePermitirDescricaoComMaisDeTresCaracteres(){
         produtoInicial.alterarDescricao("Maça");
         assertEquals(produtoInicial.getDescricao(), "Maça");
     }
 
+    // Testa se foi enviado uma mensagem caso a descricao possuia menos que 3 caracteres
     @Test
     public void deveExibirMensagemCasoDescricaoTenhaMenosDeTresCaracteres(){
         produtoInicial.alterarDescricao("a");
