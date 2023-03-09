@@ -51,9 +51,9 @@ public class ListaEncadeada {
 					celulaEncontrada = celulaEncontrada.getProximo();
 				}
 			}
-			throw new Exception("Não foi possível encontrar o item na lista: o ID informado é inválido!");
+			throw new Exception("Nao foi possivel encontrar o item na lista: o ID informado e invalido!");
 		} else
-			throw new NullPointerException("Não foi possível encontrar o item na lista: a lista está vazia!");
+			throw new Exception("Nao foi possivel encontrar o item na lista: a lista esta vazia!");
 	}
 	
 
@@ -107,17 +107,19 @@ public class ListaEncadeada {
 	 */
 	public String produtosAbaixoMinimoEstoque() {
 		Celula celulaAux = this.primeira.getProximo();
-		String contador = "";
+		StringBuilder contador = new StringBuilder("");
 		while(celulaAux != null) {
 			if(celulaAux.getItem().getQuantidadeEstoque() < 10) {
-				contador += celulaAux.getItem().getDescricao();
-				contador += " ";
+				contador.append(celulaAux.getItem().getDescricao());
+				contador.append(" ");
 			}
 			celulaAux = celulaAux.getProximo();
 		}
-		if(contador != "")
-			contador = contador.substring(0, contador.length() - 1);
-		return contador;
+		
+		String envio = contador.toString();
+		if(envio != "")
+			envio = envio.substring(0, contador.length() - 1);
+		return envio;
 	}
 
 	/**
