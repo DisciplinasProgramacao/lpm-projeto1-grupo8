@@ -139,7 +139,7 @@ class ListaEncadeadaTest {
 		
 	}
 	
-
+	// verifica o alerta do estoque minimo e a saida (se a descricao ta certa) 
 	@Test
 	void quantidadeVariosEstoqueMinimo() {
 		produtoVazio.alterarDescricao("asa");
@@ -161,9 +161,10 @@ class ListaEncadeadaTest {
 		listaVazia.inserir(produtoTeste4);
 		
 		
-		assertEquals("asa bsa da", listaVazia.produtosAbaixoMinimoEstoque());
+		assertEquals("asa bsa dsa", listaVazia.produtosAbaixoMinimoEstoque());
 	}
 	
+	//Verifica o valor total em $$ dos produtos no estoque
 	@Test
 	void valorTotalEmEstoque() {
 		produtoVazio.alterarPrecoCusto(3);
