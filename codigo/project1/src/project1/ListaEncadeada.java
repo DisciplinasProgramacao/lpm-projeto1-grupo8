@@ -139,6 +139,27 @@ public class ListaEncadeada {
 		}
 		return total;
 	}
+	
+	/**
+	 * Verifica se o produto esta no estoque pela sua descricao
+	 * 
+	 * @return produto
+	 */
+	public Produto getProdutoPorDescricao(String desc) throws Exception {
+		Celula celulaEncontrada;
+		if (! listaVazia()) {
+			celulaEncontrada = this.primeira;
+			while(celulaEncontrada != null) {
+				if(celulaEncontrada.getItem().getDescricao()==desc) {
+					return celulaEncontrada.getItem();
+				}else {
+					celulaEncontrada = celulaEncontrada.getProximo();
+				}
+			}
+			throw new Exception("Nao foi possivel encontrar o item na lista: a descricao informada e invalida!");
+		} else
+			throw new Exception("Nao foi possivel encontrar o item na lista: a lista esta vazia!");
+	}
 		
 	//#endregion
 }
