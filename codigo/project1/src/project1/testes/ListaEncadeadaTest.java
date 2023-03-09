@@ -32,10 +32,10 @@ class ListaEncadeadaTest {
 	}
 
 /*
-	• Quantos produtos constam do estoque.
-	• Qual o valor total do estoque atual.
-	• Quais são os produtos atuais com estoque abaixo do mínimo.
-	• Repor o estoque (comprar) ou retirar do estoque (produtos à escolha do administrador)
+	ï¿½ Quantos produtos constam do estoque.
+	ï¿½ Qual o valor total do estoque atual.
+	ï¿½ Quais sï¿½o os produtos atuais com estoque abaixo do mï¿½nimo.
+	ï¿½ Repor o estoque (comprar) ou retirar do estoque (produtos ï¿½ escolha do administrador)
 */
 	@Test
 	void reporEstoque() throws Exception {
@@ -86,7 +86,7 @@ class ListaEncadeadaTest {
 		Exception exception = assertThrows(Exception.class, () -> {
 			lista.getProdutoPorID(999999999);
 	    });
-		String expectedMessage = "Não foi possível encontrar o item na lista: a lista está vazia!";
+		String expectedMessage = "NÃ£o foi possÃ­vel encontrar o item na lista: a lista estÃ¡ vazia!";
 
 		assertEquals(expectedMessage, exception.getMessage());
 		
