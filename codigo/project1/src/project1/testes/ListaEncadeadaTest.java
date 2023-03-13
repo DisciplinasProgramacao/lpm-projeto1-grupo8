@@ -181,7 +181,4 @@ class ListaEncadeadaTest {
 		
 		assertEquals(75, listaVazia.valorTotalEstoque());
 	}
-	
-	
-
 }

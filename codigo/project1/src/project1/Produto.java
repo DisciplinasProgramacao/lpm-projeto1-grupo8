@@ -9,16 +9,16 @@ import java.util.logging.Level;
  *
  */
 public class Produto {
-    private final Logger logger = Logger.getLogger(Produto.class.getName());
+	private final Logger logger = Logger.getLogger(Produto.class.getName());
 	// #region ATRIBUTOS
 	private static int parseID;
 	private int ID;
 	protected String descricao; // Deve possuir um mínimo de 3 caracteres
 	private int quantidadeEstoque; // Quantidade mínima de cada produto = 10 itens
-	private int quantidadeTotalComprada;
-	private int quantidadeTotalVendas;
-	private double valorTotalVendas;
-	private double valorTotalCompra;
+	public int quantidadeTotalComprada;
+	public int quantidadeTotalVendas;
+	public double valorTotalVendas;
+	public double valorTotalCompra;
 	private static double valorImposto;
 	private double precoVenda;
 	private double precoCusto;
@@ -33,22 +33,14 @@ public class Produto {
 		return this.ID;
 	}
 
-	public int getQuantidadeVendidas() {
-		return quantidadeTotalVendas;
-	}
-	
 	public int getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}
-	
+
 	public double getValorTotalEstoque() {
 		return precoCusto * quantidadeEstoque;
 	}
 
-	public double getPrecoVenda() {
-		return precoVenda;
-	}
-	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -83,31 +75,28 @@ public class Produto {
 	}
 	// #endregion
 
-
 	// #region Métodos
 
 	/**
 	 * Altera a descrição de um produto 
 	 * 
-	 * @param descricao 
+	 * @param descricao
 	 */
 	public void alterarDescricao(String descricao) {
 		if (descricao != null) {
-			if(descricao.length() < 3) {
+			if (descricao.length() < 3) {
 				System.out.print("A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
-				//logger.log(Level.SEVERE, "A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
 			}
 		}
 		this.descricao = descricao;
 	}
-	
-	
+
 	public void alterarPrecoCusto(double precoCusto) {
 		this.precoCusto = precoCusto;
 	}
 
 	/**
-	 * Calcular preço de venda de um produto
+	 * Calcular preço de venda de um produto de acordo com a margem de lucro informada
 	 * 
 	 * @return preço de venda do produto
 	 */
@@ -117,7 +106,8 @@ public class Produto {
 	}
 
 	/**
-	 * Calcular margem de lucro
+	 * Método interno responsável por calcular a margem de lucro
+	 * Retorna o cálculo com a margem de lucro mínima caso receber valor inválido
 	 * 
 	 * @param porcentagem deve ser informado, como exemplo calcularMargemLucro(30), para 30%
 	 */
@@ -132,13 +122,12 @@ public class Produto {
 	}
 
 	/**
-	 * Calcular imposto sobre o produto
+	 * Método interno responsável por calcular o imposto sobre o produto
 	 * 
 	 * @return imposto sobre valor do produto
 	 */
 	private double calcularImposto(double margemLucro) {
-		valorImposto /= 100;
-		return valorImposto * (precoCusto + margemLucro);
+		return (valorImposto * (precoCusto + margemLucro));
 	}
 
 	/**
@@ -146,25 +135,29 @@ public class Produto {
 	 * 
 	 * @param quantidadeProdutosVendidos quantidade vendida
 	 */
-	public void efetuarVenda(int quantidadeProdutosVendidos) {
+	public double efetuarVenda(int quantidadeProdutosVendidos) {
 		if (quantidadeProdutosVendidos > 0) {
 			if (this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
-				logger.log(Level.SEVERE, "Estoque insuficiente");
+				logger.log(Level.WARNING, "Venda nao efetuada, estoque insuficiente");
+				return 0.0;
 			} else {
 				if (estoqueAbaixoDoMinimo()) {
 					logger.log(Level.WARNING, "Estoque atual da mercearia abaixo do minimo");
 				}
 				removerEstoque(quantidadeProdutosVendidos);
 				this.quantidadeTotalVendas += quantidadeProdutosVendidos;
-				this.valorTotalVendas += calcularValorArrecadado(quantidadeProdutosVendidos); //valor total arrecadado com as vendas
+				double valorVendaAtual = calcularValorArrecadado(quantidadeProdutosVendidos); // valor da venda ATUAL do produto
+				this.valorTotalVendas += valorVendaAtual; // valor TOTAL arrecadado com todas as vendas do produto
+				return valorVendaAtual;
 			}
 		} else {
-			logger.log(Level.SEVERE, "Quantidade de vendas incorreto");
+			logger.log(Level.SEVERE, "Quantidade de produtos sendo vendidos incorreta");
+			return 0.0;
 		}
 	}
 
 	/**
-	 * Calcula o valor arrecadado a partir da quantiade de produtos e o preco de venda
+	 * Calcula o valor arrecadado a partir da quantidade de produtos e o preco de venda
 	 * 
 	 * @param quantidade
 	 */
@@ -193,15 +186,27 @@ public class Produto {
 	 * 
 	 * @param quantidadeProdutosComprados (quantidade total de produtos adquiridos)
 	 */
-	public void efetuarCompra(int quantidadeProdutosComprados) {
-		if (this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
-			adicionarEstoque(quantidadeProdutosComprados);
-			this.valorTotalCompra += calcularValorAquisicao(quantidadeProdutosComprados); //custos TOTAIS com a aquisição de um produto
+	public double efetuarCompra(int quantidadeProdutosComprados) {
+		double valorAquisicaoAtual;
+		if (quantidadeProdutosComprados > 0) {
+			if (this.quantidadeEstoque + quantidadeProdutosComprados >= 10) {
+				adicionarEstoque(quantidadeProdutosComprados);
+				valorAquisicaoAtual = calcularValorAquisicao(quantidadeProdutosComprados); // valor sendo gasto no MOMENTO para comprar o produto
+				this.valorTotalCompra += valorAquisicaoAtual; // custos TOTAIS com a aquisição de um produto
+				return valorAquisicaoAtual;
+			} else {
+				adicionarEstoque(quantidadeProdutosComprados);
+				valorAquisicaoAtual = calcularValorAquisicao(quantidadeProdutosComprados);
+				this.valorTotalCompra += valorAquisicaoAtual;
+				logger.log(Level.WARNING,
+						"Compra efetuada, porém quantidade atual de itens em estoque é abaixo do mínimo recomendado, deve ser efetuada a compra de mais produtos!");
+				return valorAquisicaoAtual;
+			}
 		} else {
-			adicionarEstoque(quantidadeProdutosComprados);
-			this.valorTotalCompra += calcularValorAquisicao(quantidadeProdutosComprados);
-			logger.log(Level.INFO, "Estoque minimo insuficiente, deve ser comprado um numero maior de itens para atingir o estoque minimo");
+			logger.log(Level.SEVERE, "Quantidade de produtos sendo comprados incorreta");
+			return 0.0;
 		}
+
 	}
 
 	private double calcularValorAquisicao(int quantidade) {
