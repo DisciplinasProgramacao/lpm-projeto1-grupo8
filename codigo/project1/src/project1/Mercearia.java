@@ -92,4 +92,7 @@ public class Mercearia {
 		return this.listaProdutos.valorTotalReposicao();
 	}
 	
+	public String receberInfosProduto (String descricao) throws Exception {
+		return this.listaProdutos.getProdutoPorDescricao(descricao).listarInformacoesProduto();
+	}
 }

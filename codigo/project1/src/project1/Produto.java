@@ -233,5 +233,11 @@ public class Produto {
 		this.quantidadeEstoque += quantidadeProdutosComprados;
 		this.quantidadeTotalComprada += quantidadeProdutosComprados;
 	}
+	
+	public String listarInformacoesProduto() {
+		StringBuilder infos = new StringBuilder("");
+		infos.append("ID: " + this.ID + "\nDescricao:" + this.descricao + "\nQuantidade em estoque: " + this.quantidadeEstoque + "\nQuantidade total comprada: " + this.quantidadeTotalComprada + "\nQuantidade total vendida" + this.quantidadeTotalVendas + "\nValorTotalVendas" + this.valorTotalVendas);	
+		return infos.toString();
+	}
 	// #endregion
 }
