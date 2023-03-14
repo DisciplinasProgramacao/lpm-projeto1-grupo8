@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class App {
     static Mercearia mercearia = new Mercearia();
-    static Scanner leitor = new Scanner(System.in);
     
     public static void main(String[] args) throws Exception {
+        Scanner leitor = new Scanner(System.in);
+
         int opcaoMenu;
         adicionarProdutos();
         exibirMenu();
@@ -25,6 +26,7 @@ public class App {
     }
 
     private static void executaOpcaoMenu(int opcaoMenu) throws Exception {
+        Scanner leitor = new Scanner(System.in);
         Produto produto;
         String desc;
         int qntTotalAdquirido;
