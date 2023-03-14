@@ -21,11 +21,11 @@ class ListaEncadeadaTest {
 		produtoVazio = new Produto();
 	}
 
-/*
-	� Quantos produtos constam do estoque.
-	� Qual o valor total do estoque atual.
-	� Quais sao os produtos atuais com estoque abaixo do minimo.
-	� Repor o estoque (comprar) ou retirar do estoque (produtos e escolha do administrador)
+/* Os testes validam:
+	- Quantos produtos constam do estoque.
+	- Qual o valor total do estoque atual.
+	- Quais sao os produtos atuais com estoque abaixo do minimo.
+	- Repor o estoque (comprar) ou retirar do estoque (produtos e escolha do administrador)
 */
 
 	
