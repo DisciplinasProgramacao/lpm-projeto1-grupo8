@@ -13,8 +13,8 @@ public class Produto {
 	// #region ATRIBUTOS
 	private static int parseID;
 	private int ID;
-	protected String descricao; // Deve possuir um mínimo de 3 caracteres
-	private int quantidadeEstoque; // Quantidade mínima de cada produto = 10 itens
+	protected String descricao; // Deve possuir um minimo de 3 caracteres
+	private int quantidadeEstoque; // Quantidade minima de cada produto = 10 itens
 	private int quantidadeTotalComprada;
 	private int quantidadeTotalVendas;
 	private double valorTotalVendas;
@@ -85,18 +85,15 @@ public class Produto {
 		init("abc", 0, 0, 0);
 	}
 
-	/**
-	 * @param descricao nome/descricao
-	 */
 	public Produto(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
 		init(descricao, quantidadeTotalAdquirida, precoCusto, margemLucro);
 	}
 	// #endregion
 
-	// #region Métodos
+	// #region Metodos
 
 	/**
-	 * Altera a descrição de um produto 
+	 * Altera a descricao de um produto 
 	 * 
 	 * @param descricao
 	 */
@@ -109,14 +106,19 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
+	/**
+	 * Altera a preco de custo de um produto 
+	 * 
+	 * @param precoCusto
+	 */
 	public void alterarPrecoCusto(double precoCusto) {
 		this.precoCusto = precoCusto;
 	}
 
 	/**
-	 * Calcular preço de venda de um produto de acordo com a margem de lucro informada
+	 * Calcular preco de venda de um produto de acordo com a margem de lucro informada
 	 * 
-	 * @return preço de venda do produto
+	 * @return preco de venda do produto
 	 */
 	public double calcularPrecoDeVendaUnitario() {
 		double margemLucroCalculada = calcularMargemLucro(this.margemLucro);
@@ -124,8 +126,8 @@ public class Produto {
 	}
 
 	/**
-	 * Método interno responsável por calcular a margem de lucro
-	 * Retorna o cálculo com a margem de lucro mínima caso receber valor inválido
+	 * Metodo interno responsavel por calcular a margem de lucro
+	 * Retorna o calculo com a margem de lucro minima caso receber valor invalido
 	 * 
 	 * @param porcentagem deve ser informado, como exemplo calcularMargemLucro(30), para 30%
 	 */
@@ -140,7 +142,7 @@ public class Produto {
 	}
 
 	/**
-	 * Método interno responsável por calcular o imposto sobre o produto
+	 * Metodo interno responsavel por calcular o imposto sobre o produto
 	 * 
 	 * @return imposto sobre valor do produto
 	 */
@@ -149,7 +151,7 @@ public class Produto {
 	}
 
 	/**
-	 * Realizar vendas
+	 * Metodo que realiza as vendas dos produtos na mercearia
 	 * 
 	 * @param quantidadeProdutosVendidos quantidade vendida
 	 */
@@ -176,7 +178,7 @@ public class Produto {
 	}
 
 	/**
-	 * Calcula o valor arrecadado a partir da quantidade de produtos e o preco de venda
+	 * Calcula o valor arrecadado pela mecearia, a partir da quantidade de produtos e o preco de venda
 	 * 
 	 * @param quantidade
 	 */
@@ -184,7 +186,7 @@ public class Produto {
 		return this.precoVenda * quantidade;
 	}
 
-	// monitora se a qtdAtual em estoque está abaixo do mínimo
+	// monitora se a quantidade atual em estoque esta abaixo do minimo
 	public boolean estoqueAbaixoDoMinimo() {
 		if (this.quantidadeEstoque < 10)
 			return true;
@@ -192,7 +194,7 @@ public class Produto {
 	}
 
 	/**
-	 * Remove itens do estoque após realizar venda de produtos
+	 * Remove itens do estoque apos realizar venda de produtos
 	 * 
 	 * @param quantidadeProdutosVendidos
 	 */
@@ -201,9 +203,9 @@ public class Produto {
 	}
 
 	/**
-	 * Calcula a quantidade total de produtos comprados pela mercearia
+	 * Calcula a quantidade total de produtos comprados pela mercearia, recebendo a quantidade total de produtos adquiridos
 	 * 
-	 * @param quantidadeProdutosComprados (quantidade total de produtos adquiridos)
+	 * @param quantidadeProdutosComprados
 	 */
 	public double efetuarCompra(int quantidadeProdutosComprados) {
 		double valorAquisicaoAtual;
@@ -228,12 +230,17 @@ public class Produto {
 
 	}
 
+	/**
+	 * Calcula o valor de de um produto adiquirido a partir do seu preco de custo 
+	 * 
+	 * @param quantidade
+	 */
 	private double calcularValorAquisicao(int quantidade) {
 		return this.precoCusto * quantidade;
 	}
 
 	/**
-	 * Adicionar itens no estoque após compra de novos produtos
+	 * Adiciona itens no estoque apos a compra de novos produtos
 	 * 
 	 * @param quantidadeProdutosComprados
 	 */
@@ -242,6 +249,12 @@ public class Produto {
 		this.quantidadeTotalComprada += quantidadeProdutosComprados;
 	}
 	
+
+	/**
+	 * Mostra as informacoes de um produto
+	 * 
+	 * @param listarInformacoesProduto
+	 */
 	public String listarInformacoesProduto() {
 		StringBuilder infos = new StringBuilder("");
 		infos.append("ID: " + this.ID + "\nDescricao: " + this.descricao + "\nQuantidade em estoque: " + this.quantidadeEstoque + "\nQuantidade total comprada: " + this.quantidadeTotalComprada + "\nQuantidade total vendida: " + this.quantidadeTotalVendas + "\nValorTotalVendas: " + this.valorTotalVendas + "\nPreco custo: " + this.precoCusto + "\nPreco venda: " + this.precoVenda);	

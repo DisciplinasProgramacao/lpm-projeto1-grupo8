@@ -133,6 +133,7 @@ public class App {
     	mercearia.adicionarProduto(produto3);
     }
     
+    
     public static void listarProdutos() {
     	System.out.println("Produtos disponiveis na mercearia: ");
         System.out.println(mercearia.listarProdutos());
