@@ -181,4 +181,47 @@ class ListaEncadeadaTest {
 		
 		assertEquals(75, listaVazia.valorTotalEstoque());
 	}
+	
+	@Test
+	void receberTodosProdutosEstoque() {
+		produtoVazio.alterarDescricao("asa");
+		Produto produtoTeste2 = new Produto();
+		produtoTeste2.alterarDescricao("bsa");
+		Produto produtoTeste3 = new Produto();
+		produtoTeste3.alterarDescricao("csa");
+		Produto produtoTeste4 = new Produto();
+		produtoTeste4.alterarDescricao("dsa");
+		
+		produtoVazio.efetuarCompra(8);
+		produtoTeste2.efetuarCompra(14);
+		produtoTeste3.efetuarCompra(10);
+		produtoTeste4.efetuarCompra(19);
+		
+		listaVazia.inserir(produtoVazio);
+		listaVazia.inserir(produtoTeste2);
+		listaVazia.inserir(produtoTeste3);
+		listaVazia.inserir(produtoTeste4);
+		
+		
+		assertEquals("asa bsa csa dsa", listaVazia.listarProdutos());
+	}
+	
+	@Test
+	void verTotalVendido() throws Exception {
+		produtoVazio.alterarDescricao("asse");
+		produtoVazio.alterarPrecoCusto(10);
+		produtoVazio.efetuarCompra(15);
+		listaVazia.inserir(produtoVazio);
+		listaVazia.getProdutoPorDescricao("asse").efetuarVenda(8);
+		assertEquals(122.72, listaVazia.valorTotalVendido());
+	}
+	
+	@Test
+	void verTotalAquisicao() throws Exception {
+		produtoVazio.alterarDescricao("asse");
+		produtoVazio.alterarPrecoCusto(10);
+		produtoVazio.efetuarCompra(15);
+		listaVazia.inserir(produtoVazio);
+		assertEquals(150, listaVazia.valorTotalReposicao());
+	}
 }

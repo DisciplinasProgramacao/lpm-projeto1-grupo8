@@ -160,6 +160,48 @@ public class ListaEncadeada {
 		} else
 			throw new Exception("Nao foi possivel encontrar o item na lista: a lista esta vazia!");
 	}
+
+
+	public String listarProdutos() {
+		Celula celulaAux = this.primeira.getProximo();
+		StringBuilder contador = new StringBuilder("");
+		while(celulaAux != null) {
+			contador.append(celulaAux.getItem().getDescricao());
+			contador.append(" ");
+			celulaAux = celulaAux.getProximo();
+		}
+		
+		String envio = contador.toString();
+		if(envio != "")
+			envio = envio.substring(0, contador.length() - 1);
+		return envio;
+	}
+	
+	public double valorTotalVendido() {
+		
+		Celula celulaAux = this.primeira.getProximo();
+		double total = 0;
+		while(celulaAux != null) {
+			
+			total += celulaAux.getItem().getValorVendaTotal();
+			
+			celulaAux = celulaAux.getProximo();
+		}
+		return total;
+	}
+	
+	public double valorTotalReposicao() {
+		
+		Celula celulaAux = this.primeira.getProximo();
+		double total = 0;
+		while(celulaAux != null) {
+			
+			total += celulaAux.getItem().getValorTotalReposicao();
+			
+			celulaAux = celulaAux.getProximo();
+		}
+		return total;
+	}
 		
 	//#endregion
 }

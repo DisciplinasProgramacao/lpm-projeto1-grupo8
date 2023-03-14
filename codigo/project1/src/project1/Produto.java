@@ -22,6 +22,7 @@ public class Produto {
 	private static double valorImposto;
 	private double precoVenda;
 	private double precoCusto;
+	private double margemLucro;
 	static {
 		parseID = 0;
 		valorImposto = 0.18;
@@ -44,6 +45,14 @@ public class Produto {
 	public String getDescricao() {
 		return descricao;
 	}
+	
+	public double getValorVendaTotal() {
+		return valorTotalVendas;
+	}
+	
+	public double getValorTotalReposicao() {
+		return valorTotalCompra;
+	}
 
 	// #endregion
 
@@ -57,8 +66,9 @@ public class Produto {
 		this.valorTotalVendas = 0;
 		this.valorTotalCompra = 0;
 		this.precoCusto = precoCusto;
+		this.margemLucro = margemLucro;
 		if (margemLucro > 0)
-			this.precoVenda = calcularPrecoDeVendaUnitario(margemLucro);
+			calcularPrecoDeVendaUnitario();
 		if (quantidadeTotalAdquirida >= 10)
 			efetuarCompra(quantidadeTotalAdquirida);
 	}
@@ -100,9 +110,9 @@ public class Produto {
 	 * 
 	 * @return preço de venda do produto
 	 */
-	public double calcularPrecoDeVendaUnitario(double porcentagemMargemLucro) {
-		double margemLucroCalculada = calcularMargemLucro(porcentagemMargemLucro);
-		return this.precoCusto + calcularImposto(margemLucroCalculada) + margemLucroCalculada;
+	public void calcularPrecoDeVendaUnitario() {
+		double margemLucroCalculada = calcularMargemLucro(this.margemLucro);
+		precoVenda = this.precoCusto + calcularImposto(margemLucroCalculada) + margemLucroCalculada;
 	}
 
 	/**
@@ -137,6 +147,7 @@ public class Produto {
 	 */
 	public double efetuarVenda(int quantidadeProdutosVendidos) {
 		if (quantidadeProdutosVendidos > 0) {
+			calcularPrecoDeVendaUnitario();
 			if (this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
 				logger.log(Level.WARNING, "Venda nao efetuada, estoque insuficiente");
 				return 0.0;

@@ -13,7 +13,6 @@ public class Mercearia {
 	/********************
 		Atributos
 	********************/
-	private String nome;
 	
 	private ListaEncadeada listaProdutos;
 	
@@ -56,6 +55,33 @@ public class Mercearia {
 	
 	public Produto receberProdutoPorDescricao (String descricao) throws Exception {
 		return this.listaProdutos.getProdutoPorDescricao(descricao);
+	}
+	
+	public void vender (String desc, int qtd) throws Exception {
+		this.listaProdutos.getProdutoPorDescricao(desc).efetuarVenda(qtd);
+	}
+	
+	public void comprar(String desc, int qtd) {
+		try {
+			this.listaProdutos.getProdutoPorDescricao(desc).efetuarCompra(qtd);
+		} catch (Exception e) {
+			Produto produto = new Produto();
+			produto.alterarDescricao(desc);
+			produto.efetuarCompra(qtd);
+			this.listaProdutos.inserir(produto);
+		}
+	}
+	
+	public String listarProdutos() {
+		return this.listaProdutos.listarProdutos();
+	}
+	
+	public double receberValorTotalVendido() {
+		return this.listaProdutos.valorTotalVendido();
+	}
+	
+	public double receberValorTotalReposicao() {
+		return this.listaProdutos.valorTotalReposicao();
 	}
 	
 }
