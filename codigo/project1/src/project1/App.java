@@ -43,10 +43,8 @@ public class App {
                 precoCusto = leitor.nextDouble();
                 System.out.println("E por fim a margem de lucro: ");
                 margemLucro = leitor.nextDouble();
-                System.out.println("Criando produto! ");
-                produto = new Produto(desc, qntTotalAdquirido, precoCusto, margemLucro);
-                //mercearia.adicionarProduto(desc, precoCusto, margemLucro, qntTotalAdquirido);
-                mercearia.adicionarProduto(produto);
+                System.out.println("Criando produto!");
+                mercearia.adicionarProduto(desc, precoCusto, margemLucro, qntTotalAdquirido);
                 break;
             case 2:
                 System.out.println("Produtos disponiveis na mercearia: ");
@@ -66,28 +64,30 @@ public class App {
 
                 break;
             case 4:
-               mercearia.adicionarProduto(produto.getDescricao(), 9.50, 66, produto.getQuantidadeEstoque());
+               mercearia.adicionarProduto(produto);
+               System.out.println(produto.getDescricao());
                 break;
             case 5:
                 // mercearia.removerProduto(produto2);
                 break;
             case 6:
-                System.out.println(mercearia.receberQtdProdutosCadastradosEstoque() + mercearia.listarProdutos());
-                //mercearia.receberQtdProdutosCadastradosEstoque();
+                System.out.println(mercearia.receberQtdProdutosCadastradosEstoque()+ "\n" + mercearia.listarProdutos());
                 break;
             case 7:
-                mercearia.receberValorTotalEmEstoque();
 
+                System.out.println(mercearia.receberValorTotalEmEstoque());
+                
                 break;
             case 8:
-                mercearia.receberNomesProdutosAbaixoMinimoEstoque();
+
+                System.out.println(mercearia.receberNomesProdutosAbaixoMinimoEstoque());
 
                 break;
             case 9:
                 System.out.println("Digite a descricao do produto que deseja pesquisar: ");
                 desc = leitor.nextLine();
                 mercearia.receberProdutoPorDescricao(desc);
-
+                
                 break;
             case 10:
                 // mercearia.receberProdutoPorID(produto.getID());

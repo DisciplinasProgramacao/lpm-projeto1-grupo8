@@ -150,7 +150,8 @@ public class ListaEncadeada {
 		if (! listaVazia()) {
 			celulaEncontrada = this.primeira;
 			while(celulaEncontrada != null) {
-				if(celulaEncontrada.getItem().getDescricao()==desc) {
+				if(celulaEncontrada.getItem().getDescricao().contains(desc)) {
+					System.out.println("Item encontrado:  " + celulaEncontrada.getItem().getDescricao());
 					return celulaEncontrada.getItem();
 				}else {
 					celulaEncontrada = celulaEncontrada.getProximo();

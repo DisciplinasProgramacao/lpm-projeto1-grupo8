@@ -59,7 +59,7 @@ public class Produto {
 	// #region CONSTRUTORES
 	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
 		this.ID = parseID++;
-		alterarDescricao(descricao);
+		this.descricao = descricao; //alterarDescricao(descricao);
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;
@@ -74,7 +74,7 @@ public class Produto {
 	}
 
 	public Produto() {
-		init(null, 0, 0, 0);
+		init("abc", 0, 0, 0);
 	}
 
 	/**
@@ -92,13 +92,13 @@ public class Produto {
 	 * 
 	 * @param descricao
 	 */
-	public void alterarDescricao(String descricao) {
+	public String alterarDescricao(String descricao) {
 		if (descricao != null) {
 			if (descricao.length() < 3) {
 				System.out.print("A descrição é obrigatória e deve possuir no mínimo 3 caracteres");
 			}
 		}
-		this.descricao = descricao;
+		return this.descricao = descricao;
 	}
 
 	public void alterarPrecoCusto(double precoCusto) {
