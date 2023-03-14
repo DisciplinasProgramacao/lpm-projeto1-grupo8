@@ -3,6 +3,8 @@ package project1;
 import java.util.Scanner;
 
 public class App {
+    static Mercearia mercearia = new Mercearia();
+    
     public static void main(String[] args) throws Exception {
         Scanner leitor = new Scanner(System.in);
 
@@ -30,24 +32,21 @@ public class App {
         int qntTotalAdquirido;
         double precoCusto;
         double margemLucro;
-        Mercearia mercearia = new Mercearia();
-
-        produto = new Produto("banana doce", 23, 9.50, 66);
-        mercearia.adicionarProduto(produto);
-
+        produto = new Produto("Banana Doce", 100, 2, 50);
         switch (opcaoMenu) {
             case 1:
-                System.out.println("Por gentileza, digite a descrição do produto:");
+                System.out.println("Por gentileza, digite a descriçãÃ£o do produto:");
                 desc = leitor.nextLine();
                 System.out.println("Agora digite o total adquirido do produto:");
                 qntTotalAdquirido = leitor.nextInt();
-                System.out.println("O preço de custo do produto:");
+                System.out.println("O preç§o de custo do produto:");
                 precoCusto = leitor.nextDouble();
                 System.out.println("E por fim a margem de lucro: ");
                 margemLucro = leitor.nextDouble();
                 System.out.println("Criando produto! ");
-                mercearia.adicionarProduto(desc, precoCusto, margemLucro, qntTotalAdquirido);
-
+                produto = new Produto(desc, qntTotalAdquirido, precoCusto, margemLucro);
+                //mercearia.adicionarProduto(desc, precoCusto, margemLucro, qntTotalAdquirido);
+                mercearia.adicionarProduto(produto);
                 break;
             case 2:
                 System.out.println("Produtos disponiveis na mercearia: ");
@@ -63,17 +62,18 @@ public class App {
 
                 break;
             case 3:
-                produto.efetuarCompra(6);
+               produto.efetuarCompra(6);
 
                 break;
             case 4:
-                mercearia.adicionarProduto(produto.getDescricao(), 9.50, 66, produto.getQuantidadeEstoque());
+               mercearia.adicionarProduto(produto.getDescricao(), 9.50, 66, produto.getQuantidadeEstoque());
                 break;
             case 5:
                 // mercearia.removerProduto(produto2);
                 break;
             case 6:
-                mercearia.receberQtdProdutosCadastradosEstoque();
+                System.out.println(mercearia.receberQtdProdutosCadastradosEstoque() + mercearia.listarProdutos());
+                //mercearia.receberQtdProdutosCadastradosEstoque();
                 break;
             case 7:
                 mercearia.receberValorTotalEmEstoque();
