@@ -18,7 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 public class ProdutoTest {
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     Produto produtoInicial;
-    Produto produtoInvalido;
+    Produto produtoMargemLucroMinima, produtoMargemLucroMaxima;
 
     @BeforeEach
     public void prepare() throws UnsupportedEncodingException{
@@ -47,17 +47,19 @@ public class ProdutoTest {
 
     @Test
     public void deveCalcularPrecoVendaDeAcordoComMargemDeLucroInformada(){
-        assertEquals(produtoInicial.calcularPrecoDeVendaUnitario(35), 15.93);
+        assertEquals(produtoInicial.calcularPrecoDeVendaUnitario(), 15.93);
     }
    
     @Test
     public void deveCalcularPrecoVendaComMargemDeLucroMinimaCasoValorSejaMenorQueTrinta(){
-        assertEquals(produtoInicial.calcularPrecoDeVendaUnitario(10), 15.34);
+        produtoMargemLucroMinima = new Produto("Laranja", 10, 10, 10);    
+        assertEquals(produtoMargemLucroMinima.calcularPrecoDeVendaUnitario(), 15.34);
     }
 
     @Test
     public void deveCalcularPrecoVendaComMargemDeLucroMinimaCasoValorSejaMaiorQueOitenta(){
-        assertEquals(produtoInicial.calcularPrecoDeVendaUnitario(85), 15.34);
+        produtoMargemLucroMaxima = new Produto("Pitaya", 10, 10, 85);    
+        assertEquals(produtoMargemLucroMaxima.calcularPrecoDeVendaUnitario(), 15.34);
     }
 
     @Test
@@ -80,7 +82,7 @@ public class ProdutoTest {
         produtoInicial.efetuarVenda(2);
         produtoInicial.efetuarVenda(5);
         produtoInicial.efetuarVenda(1);
-        assertEquals(produtoInicial.valorTotalVendas, 127.44);
+        assertEquals(produtoInicial.getValorVendaTotal(), 127.44);
     }
 
     @Test
@@ -107,7 +109,7 @@ public class ProdutoTest {
         produtoInicial.efetuarCompra(2);
         produtoInicial.efetuarCompra(5);
         produtoInicial.efetuarCompra(1);
-        assertEquals(produtoInicial.valorTotalCompra, 180);
+        assertEquals(produtoInicial.getValorTotalReposicao(), 180);
     }
 
     //Valida a quantidade total de produtos comprados, os 10 produtos de quando o produto foi comprado pela primeira vez, mais as novas quantidades

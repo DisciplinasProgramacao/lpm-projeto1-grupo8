@@ -30,14 +30,14 @@ class ListaEncadeadaTest {
 
 	
 	@Test
-	void deveInserirUmProdutoNoEstoqueREPOSICAO() throws Exception {
+	void deveInserirUmProdutoNoEstoqueReposicao() throws Exception {
 		produtoVazio.alterarDescricao("teste");
 		listaVazia.inserir(produtoVazio);
 		assertEquals(produtoVazio.getDescricao(), listaVazia.getProdutoPorID(produtoVazio.getID()).getDescricao());
 	}
 	
 	@Test
-	void deveInserirVariosProdutosNoEstoqueREPOSICAO() throws Exception {
+	void deveInserirVariosProdutosNoEstoqueReposicao() throws Exception {
 		for(int i = 0;i<10;i++) {
 			Produto produto = new Produto();
 			produto.alterarDescricao("teste" + i);
@@ -56,12 +56,12 @@ class ListaEncadeadaTest {
 	}
 	
 	@Test
-	void deveMostrarNoEstoqueNenhumProduto() {
+	void deveRetornarZeroCasoNaoExistaNenhumProdutoNoEstoque() {
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
 	}
 	
 	@Test
-	void DeveMostrarNoEstoqueSeisProdutos() {
+	void deveMostrarNoEstoqueSeisProdutos() {
 		listaVazia.inserir(produtoVazio);
 		listaVazia.inserir(produtoVazio);
 		listaVazia.inserir(produtoVazio);
@@ -83,7 +83,7 @@ class ListaEncadeadaTest {
 	}
 	
 	@Test 
-	void deveRemoverUmProdutoNoEstoque() {
+	void deveRemoverUmProdutoDoEstoque() {
 		listaVazia.inserir(produtoVazio);
 		listaVazia.remover(produtoVazio);
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
@@ -103,7 +103,7 @@ class ListaEncadeadaTest {
 	}
 	
 	@Test
-	void deveMostrarQuantidadeEstoqueMinimoGerandoAlerta() {
+	void deveMostrarProdutosComEstoqueAbaixoDoMinimoGerandoAlerta() {
 		produtoVazio.efetuarCompra(9);
 		produtoVazio.alterarDescricao("as");
 		listaVazia.inserir(produtoVazio);
@@ -111,7 +111,7 @@ class ListaEncadeadaTest {
 	}
 	
 	@Test
-	void deveMostrarQuantidadeEstoqueMinimoAcimaDez() {
+	void deveRetornarVazioCasoNaoExistamProdutosComEstoqueAbaixoDoMinimo() {
 		produtoVazio.efetuarCompra(10);
 		produtoVazio.alterarDescricao("asa");
 		listaVazia.inserir(produtoVazio);

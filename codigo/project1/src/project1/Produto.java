@@ -17,8 +17,8 @@ public class Produto {
 	private int quantidadeEstoque; // Quantidade mínima de cada produto = 10 itens
 	public int quantidadeTotalComprada;
 	public int quantidadeTotalVendas;
-	public double valorTotalVendas;
-	public double valorTotalCompra;
+	private double valorTotalVendas;
+	private double valorTotalCompra;
 	private static double valorImposto;
 	private double precoVenda;
 	private double precoCusto;
@@ -68,7 +68,7 @@ public class Produto {
 		this.precoCusto = precoCusto;
 		this.margemLucro = margemLucro;
 		if (margemLucro > 0)
-			calcularPrecoDeVendaUnitario();
+			this.precoVenda = calcularPrecoDeVendaUnitario();
 		if (quantidadeTotalAdquirida >= 10)
 			efetuarCompra(quantidadeTotalAdquirida);
 	}
@@ -110,9 +110,9 @@ public class Produto {
 	 * 
 	 * @return preço de venda do produto
 	 */
-	public void calcularPrecoDeVendaUnitario() {
+	public double calcularPrecoDeVendaUnitario() {
 		double margemLucroCalculada = calcularMargemLucro(this.margemLucro);
-		precoVenda = this.precoCusto + calcularImposto(margemLucroCalculada) + margemLucroCalculada;
+		return this.precoCusto + calcularImposto(margemLucroCalculada) + margemLucroCalculada;
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class Produto {
 	 */
 	public double efetuarVenda(int quantidadeProdutosVendidos) {
 		if (quantidadeProdutosVendidos > 0) {
-			calcularPrecoDeVendaUnitario();
+			this.precoVenda = calcularPrecoDeVendaUnitario();
 			if (this.quantidadeEstoque - quantidadeProdutosVendidos < 0) {
 				logger.log(Level.WARNING, "Venda nao efetuada, estoque insuficiente");
 				return 0.0;
