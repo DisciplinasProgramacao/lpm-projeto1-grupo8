@@ -4,7 +4,14 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 /**
- * @author grupo8
+ * @author 
+ * Arthur Jansen Oliveira
+ * Bárbara Mattioly Andrade
+ * Gabriel Pimentel Tabatinga
+ * Henrique Grissi C Soeiro de Carvalho
+ * Laura Enísia Rodrigues Melo
+ * 
+ * 
  * @version 0.1
  *
  */

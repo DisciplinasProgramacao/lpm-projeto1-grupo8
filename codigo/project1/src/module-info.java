@@ -1,8 +1,13 @@
 /**
+ * @author 
+ * Arthur Jansen Oliveira
+ * Bárbara Mattioly Andrade
+ * Gabriel Pimentel Tabatinga
+ * Henrique Grissi C Soeiro de Carvalho
+ * Laura Enísia Rodrigues Melo
  * 
- */
-/**
- * @author grupo8
+ * 
+ * @version 0.1
  *
  */
 module project1 {
