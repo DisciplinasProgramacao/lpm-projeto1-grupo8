@@ -33,6 +33,10 @@ public class Mercearia {
 		this.listaProdutos.inserir(produto);
 	}
 	
+	public void adicionarProduto(Produto produto) {
+		this.listaProdutos.inserir(produto);
+	}
+	
 	public int receberQtdProdutosCadastradosEstoque() {
 		return this.listaProdutos.quantidadeProdutosEstoque();
 	}

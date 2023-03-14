@@ -32,6 +32,7 @@ public class App {
         Mercearia mercearia = new Mercearia();
 
         produto = new Produto("banana doce", 23, 9.50, 66);
+        mercearia.adicionarProduto(produto);
 
         switch (opcaoMenu) {
             case 1:
