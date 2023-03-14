@@ -64,19 +64,24 @@ public class App {
                 break;
             case 4:
                 //Consultar dados de um produto especifico.
+            	listarProdutos();
+            	System.out.println("Digite qual produto sera consultado: ");
+            	String prodCons = leitor.nextLine();
+            	System.out.println(mercearia.receberInfosProduto(prodCons));
                 break;
             case 5:
                 //5) Consultar todos os produtos.
+            	listarProdutos();
                 break;
             case 6:
                 //6) Exibir balanço da empresa (valor do estoque atual, valor vendido e gasto em pedidos de reposicao).
                 break;
             case 7:
                 //7) Remover produto da mercearia.
-                /*listarProdutos();
+                listarProdutos();
             	System.out.println("Digite qual produto sera removido do estoque: ");
                 String prodRem = leitor.nextLine();
-                mercearia.removerProduto(prodRem);*/                
+                mercearia.removerProduto(prodRem);                
                 break;
             case 8:
                 //8) Exibir quantidade total de produtos em estoque.
@@ -85,6 +90,7 @@ public class App {
                 //9) Listar produtos com estoque abaixo do mínimo.                
                 break;
             case 10:
+            	listarProdutos();
                 break;
         }
     }
@@ -101,7 +107,7 @@ public class App {
         System.out.println("6) Exibir balanço da empresa (valor do estoque atual, valor vendido e gasto em pedidos de reposicao).\n");    
         System.out.println("7) Remover produto da mercearia.\n");
         System.out.println("8) Exibir quantidade total de produtos em estoque.\n");
-        System.out.println("9) Listar produtos com estoque abaixo do mínimo.\n");
+        System.out.println("9) Listar produtos com estoque abaixo do minimo.\n");
         System.out.println("10) Sair.\n");
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Digite qual deseja executar: ");

@@ -236,7 +236,7 @@ public class Produto {
 	
 	public String listarInformacoesProduto() {
 		StringBuilder infos = new StringBuilder("");
-		infos.append("ID: " + this.ID + "\nDescricao:" + this.descricao + "\nQuantidade em estoque: " + this.quantidadeEstoque + "\nQuantidade total comprada: " + this.quantidadeTotalComprada + "\nQuantidade total vendida" + this.quantidadeTotalVendas + "\nValorTotalVendas" + this.valorTotalVendas);	
+		infos.append("ID: " + this.ID + "\nDescricao: " + this.descricao + "\nQuantidade em estoque: " + this.quantidadeEstoque + "\nQuantidade total comprada: " + this.quantidadeTotalComprada + "\nQuantidade total vendida: " + this.quantidadeTotalVendas + "\nValorTotalVendas: " + this.valorTotalVendas + "\nPreco custo: " + this.precoCusto + "\nPreco venda: " + this.precoVenda);	
 		return infos.toString();
 	}
 	// #endregion
