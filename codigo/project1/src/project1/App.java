@@ -4,17 +4,16 @@ import java.util.Scanner;
 
 public class App {
     static Mercearia mercearia = new Mercearia();
+    static Scanner leitor = new Scanner(System.in);
     
     public static void main(String[] args) throws Exception {
-        Scanner leitor = new Scanner(System.in);
-
         int opcaoMenu;
-
+        adicionarProdutos();
         exibirMenu();
 
         opcaoMenu = leitor.nextInt();
-        while(opcaoMenu != 11) {
-            if (opcaoMenu < 1 || opcaoMenu > 11) {
+        while(opcaoMenu != 12) {
+            if (opcaoMenu < 1 || opcaoMenu > 12) {
                 System.out.println("Opcao invalida do Menu!");
             } else {
                 executaOpcaoMenu(opcaoMenu);
@@ -26,7 +25,6 @@ public class App {
     }
 
     private static void executaOpcaoMenu(int opcaoMenu) throws Exception {
-        Scanner leitor = new Scanner(System.in);
         Produto produto;
         String desc;
         int qntTotalAdquirido;
@@ -47,8 +45,7 @@ public class App {
                 mercearia.adicionarProduto(desc, precoCusto, margemLucro, qntTotalAdquirido);
                 break;
             case 2:
-                System.out.println("Produtos disponiveis na mercearia: ");
-                System.out.println(mercearia.listarProdutos());
+            	listarProdutos();
 
                 System.out.println("Digite qual produto esta sendo vendido: ");
                 String descricaoProduto = leitor.nextLine();
@@ -60,7 +57,7 @@ public class App {
 
                 break;
             case 3:
-               produto.efetuarCompra(6);
+            	produto.efetuarCompra(6);
 
                 break;
             case 4:
@@ -68,7 +65,10 @@ public class App {
                System.out.println(produto.getDescricao());
                 break;
             case 5:
-                // mercearia.removerProduto(produto2);
+            	listarProdutos();
+            	System.out.println("Digite qual produto sera removido do estoque: ");
+                String prodRem = leitor.nextLine();
+                mercearia.removerProduto(prodRem);
                 break;
             case 6:
                 System.out.println(mercearia.receberQtdProdutosCadastradosEstoque()+ "\n" + mercearia.listarProdutos());
@@ -94,7 +94,8 @@ public class App {
 
                 break;
             case 11:
-                break;
+            	listarProdutos();
+            	break;
         }
     }
 
@@ -112,8 +113,23 @@ public class App {
         System.out.println("8) Produtos abaixo do estoque.\n");
         System.out.println("9) Produtos por descricao.\n");
         System.out.println("10) Produtos por ID.\n");
-        System.out.println("11) Sair.\n");
+        System.out.println("11) Listar Produtos.\n");
+        System.out.println("12) Sair.\n");
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Digite qual deseja executar: ");
+    }
+    
+    public static void adicionarProdutos() {
+    	Produto produto = new Produto("Banana Doce", 100, 2, 50);
+    	Produto produto2 = new Produto("Duzia ovo", 20, 8, 35);
+    	Produto produto3 = new Produto("Leite", 50, 1.5, 50);
+    	mercearia.adicionarProduto(produto);
+    	mercearia.adicionarProduto(produto2);
+    	mercearia.adicionarProduto(produto3);
+    }
+    
+    public static void listarProdutos() {
+    	System.out.println("Produtos disponiveis na mercearia: ");
+        System.out.println(mercearia.listarProdutos());
     }
 }

@@ -30,7 +30,7 @@ public class ListaEncadeada {
 	 */
 	public void inserir(Produto produtoNovo) {
 		Celula novaCelula = new Celula(produtoNovo);
-		ultimo.setProximo(novaCelula);
+		ultimo.proximo = novaCelula;
 		this.ultimo = novaCelula;
 	}
 
@@ -45,10 +45,10 @@ public class ListaEncadeada {
 		if (! listaVazia()) {
 			celulaEncontrada = this.primeira;
 			while(celulaEncontrada != null) {
-				if(celulaEncontrada.getItem().getID()==ID) {
-					return celulaEncontrada.getItem();
+				if(celulaEncontrada.item.getID()==ID) {
+					return celulaEncontrada.item;
 				}else {
-					celulaEncontrada = celulaEncontrada.getProximo();
+					celulaEncontrada = celulaEncontrada.proximo;
 				}
 			}
 			throw new Exception("Nao foi possivel encontrar o item na lista: o ID informado e invalido!");
@@ -64,10 +64,10 @@ public class ListaEncadeada {
 	 */
 	public int quantidadeProdutosEstoque() {
 		int contador = 0;
-		Celula celulaAux = primeira.getProximo();
+		Celula celulaAux = primeira.proximo;
 		while(celulaAux != null) {
 			contador++;
-			celulaAux = celulaAux.getProximo();
+			celulaAux = celulaAux.proximo;
 		}
 		return contador;
 	}
@@ -85,19 +85,19 @@ public class ListaEncadeada {
 	public void remover(Produto produto) {
 		Celula celulaRemovida = null, celulaAux = this.primeira;
 			while(celulaAux != null) {
-				if(celulaAux.getProximo().getItem() == produto) {
-					celulaRemovida = celulaAux.getProximo();
+				if(celulaAux.proximo.item == produto) {
+					celulaRemovida = celulaAux.proximo;
 					break;
 				}
-				celulaAux = celulaAux.getProximo();
+				celulaAux = celulaAux.proximo;
 			}
 			if(celulaRemovida != null) {
 				if (celulaRemovida == ultimo) 
-					celulaAux.setProximo(null);
+					celulaAux.proximo = null;
 				else
-					celulaAux.setProximo(celulaRemovida.getProximo());
+					celulaAux.proximo = celulaRemovida.proximo;
 			}
-			celulaRemovida.setProximo(null);
+			celulaRemovida.proximo = null;
 	}
 
 	/**
@@ -106,19 +106,19 @@ public class ListaEncadeada {
 	 * @return quantidade de produtos abaixo min
 	 */
 	public String produtosAbaixoMinimoEstoque() {
-		Celula celulaAux = this.primeira.getProximo();
+		Celula celulaAux = this.primeira.proximo;
 		StringBuilder contador = new StringBuilder("");
 		while(celulaAux != null) {
-			if(celulaAux.getItem().getQuantidadeEstoque() < 10) {
-				contador.append(celulaAux.getItem().getDescricao());
-				contador.append(" ");
+			if(celulaAux.item.getQuantidadeEstoque() < 10) {
+				contador.append(celulaAux.item.getDescricao());
+				contador.append(", ");
 			}
-			celulaAux = celulaAux.getProximo();
+			celulaAux = celulaAux.proximo;
 		}
 		
 		String envio = contador.toString();
 		if(envio != "")
-			envio = envio.substring(0, contador.length() - 1);
+			envio = envio.substring(0, contador.length() - 2);
 		return envio;
 	}
 
@@ -129,17 +129,20 @@ public class ListaEncadeada {
 	 */
 	public double valorTotalEstoque() {
 			
-		Celula celulaAux = this.primeira.getProximo();
+		Celula celulaAux = this.primeira.proximo;
 		double total = 0;
 		while(celulaAux != null) {
 			
-			total += celulaAux.getItem().getValorTotalEstoque();
+			total += celulaAux.item.getValorTotalEstoque();
 			
-			celulaAux = celulaAux.getProximo();
+			celulaAux = celulaAux.proximo;
 		}
 		return total;
 	}
 	
+	
+	
+	//pos tdd
 	/**
 	 * Verifica se o produto esta no estoque pela sua descricao
 	 * 
@@ -150,11 +153,10 @@ public class ListaEncadeada {
 		if (! listaVazia()) {
 			celulaEncontrada = this.primeira;
 			while(celulaEncontrada != null) {
-				if(celulaEncontrada.getItem().getDescricao().contains(desc)) {
-					System.out.println("Item encontrado:  " + celulaEncontrada.getItem().getDescricao());
-					return celulaEncontrada.getItem();
+				if(celulaEncontrada.item.getDescricao().equals(desc)) {
+					return celulaEncontrada.item;
 				}else {
-					celulaEncontrada = celulaEncontrada.getProximo();
+					celulaEncontrada = celulaEncontrada.proximo;
 				}
 			}
 			throw new Exception("Nao foi possivel encontrar o item na lista: a descricao informada e invalida!");
@@ -164,42 +166,42 @@ public class ListaEncadeada {
 
 
 	public String listarProdutos() {
-		Celula celulaAux = this.primeira.getProximo();
+		Celula celulaAux = this.primeira.proximo;
 		StringBuilder contador = new StringBuilder("");
 		while(celulaAux != null) {
-			contador.append(celulaAux.getItem().getDescricao());
-			contador.append(" ");
-			celulaAux = celulaAux.getProximo();
+			contador.append(celulaAux.item.getDescricao());
+			contador.append(", ");
+			celulaAux = celulaAux.proximo;
 		}
 		
 		String envio = contador.toString();
 		if(envio != "")
-			envio = envio.substring(0, contador.length() - 1);
+			envio = envio.substring(0, contador.length() - 2);
 		return envio;
 	}
 	
 	public double valorTotalVendido() {
 		
-		Celula celulaAux = this.primeira.getProximo();
+		Celula celulaAux = this.primeira.proximo;
 		double total = 0;
 		while(celulaAux != null) {
 			
-			total += celulaAux.getItem().getValorVendaTotal();
+			total += celulaAux.item.getValorVendaTotal();
 			
-			celulaAux = celulaAux.getProximo();
+			celulaAux = celulaAux.proximo;
 		}
 		return total;
 	}
 	
 	public double valorTotalReposicao() {
 		
-		Celula celulaAux = this.primeira.getProximo();
+		Celula celulaAux = this.primeira.proximo;
 		double total = 0;
 		while(celulaAux != null) {
 			
-			total += celulaAux.getItem().getValorTotalReposicao();
+			total += celulaAux.item.getValorTotalReposicao();
 			
-			celulaAux = celulaAux.getProximo();
+			celulaAux = celulaAux.proximo;
 		}
 		return total;
 	}

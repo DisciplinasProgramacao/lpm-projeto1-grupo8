@@ -59,7 +59,7 @@ public class Produto {
 	// #region CONSTRUTORES
 	private void init(String descricao, int quantidadeTotalAdquirida, double precoCusto, double margemLucro) {
 		this.ID = parseID++;
-		alterarDescricao(descricao);
+		this.descricao = descricao;
 		this.quantidadeEstoque = 0;
 		this.quantidadeTotalComprada = 0;
 		this.quantidadeTotalVendas = 0;

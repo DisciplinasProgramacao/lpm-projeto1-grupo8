@@ -45,6 +45,10 @@ public class Mercearia {
 		this.listaProdutos.remover(produto);
 	}
 	
+	public void removerProduto(String descr) throws Exception {
+		this.listaProdutos.remover(listaProdutos.getProdutoPorDescricao(descr));
+	}
+	
 	public String receberNomesProdutosAbaixoMinimoEstoque() {
 		return this.listaProdutos.produtosAbaixoMinimoEstoque();
 	}

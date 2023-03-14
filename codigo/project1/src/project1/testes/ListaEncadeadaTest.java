@@ -138,7 +138,7 @@ class ListaEncadeadaTest {
 		listaVazia.inserir(produtoTeste3);
 		listaVazia.inserir(produtoTeste4);
 		
-		assertEquals("asa bsa dsa", listaVazia.produtosAbaixoMinimoEstoque());
+		assertEquals("asa, bsa, dsa", listaVazia.produtosAbaixoMinimoEstoque());
 	}
 	
 	//Verifica o valor total em $$ dos produtos no estoque
@@ -176,7 +176,7 @@ class ListaEncadeadaTest {
 		listaVazia.inserir(produtoTeste3);
 		listaVazia.inserir(produtoTeste4);
 		
-		assertEquals("asa bsa csa dsa", listaVazia.listarProdutos());
+		assertEquals("asa, bsa, csa, dsa", listaVazia.listarProdutos());
 	}
 	
 	@Test
