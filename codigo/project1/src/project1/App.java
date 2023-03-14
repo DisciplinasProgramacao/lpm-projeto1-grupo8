@@ -100,7 +100,7 @@ public class App {
                 System.out.println("Quantidade total de produtos distintos em estoque: " + mercearia.receberQtdProdutosCadastradosEstoque());
                 break;
             case 9:
-                System.out.println("Produtos com estoque abaixo do mínimo: " + mercearia.receberNomesProdutosAbaixoMinimoEstoque());             
+                System.out.println("Produtos com estoque abaixo do minimo: " + mercearia.receberNomesProdutosAbaixoMinimoEstoque());             
                 break;
             case 10:
                 break;
@@ -133,6 +133,7 @@ public class App {
     	mercearia.adicionarProduto(produto2);
     	mercearia.adicionarProduto(produto3);
     }
+    
     
     public static void listarProdutos() {
     	System.out.println("Produtos disponiveis na mercearia: ");

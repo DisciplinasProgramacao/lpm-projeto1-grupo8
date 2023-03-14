@@ -1,12 +1,4 @@
-/**
- * 
- */
 package project1;
-
-/**
- * @author grupo8
- *
- */
 public class Celula {
 
 	// #region ATRIBUTOS	

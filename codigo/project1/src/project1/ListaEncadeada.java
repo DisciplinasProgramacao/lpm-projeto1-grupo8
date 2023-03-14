@@ -1,8 +1,4 @@
-/**
- * 
- */
 package project1;
-
 public class ListaEncadeada {
 
 	// #region ATRIBUTOS	
@@ -142,7 +138,7 @@ public class ListaEncadeada {
 	
 	
 	
-	//pos tdd
+	//Apos o TDD
 	/**
 	 * Verifica se o produto esta no estoque pela sua descricao
 	 * 
@@ -164,7 +160,11 @@ public class ListaEncadeada {
 			throw new Exception("Nao foi possivel encontrar o item na lista: a lista esta vazia!");
 	}
 
-
+	/**
+	 * Lista todos os produtos que contem no estoque
+	 * @return envio
+	 * 
+	 */
 	public String listarProdutos() {
 		Celula celulaAux = this.primeira.proximo;
 		StringBuilder contador = new StringBuilder("");
@@ -179,7 +179,7 @@ public class ListaEncadeada {
 			envio = envio.substring(0, contador.length() - 2);
 		return envio;
 	}
-
+	
 	public double valorTotalVendido() {
 		
 		Celula celulaAux = this.primeira.proximo;
@@ -193,6 +193,10 @@ public class ListaEncadeada {
 		return total;
 	}
 	
+	/**
+	 * Calcula o valor total de produtos reabastecidos no estoque 
+	 * @return total
+	 */
 	public double valorTotalReposicao() {
 		
 		Celula celulaAux = this.primeira.proximo;
