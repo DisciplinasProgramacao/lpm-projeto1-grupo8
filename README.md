@@ -3,7 +3,7 @@
 
 O mercado varejista está em constante evolução, e acompanhar as mudanças é essencial para manter um negócio próspero. Com isso, o varejista Jhon Jhon decidiu investir em um sistema para sua mercearia que o ajude a gerenciar suas vendas.
 
-O objetivo deste projeto é criar um sistema completo para a mercearia, permitindo que os clientes consultem e comprem produtos de forma rápida e fácil, e também que o proprietário administre o estoque e as finanças do estabelecimento de maneira mais eficiente.
+O objetivo deste projeto é criar um sistema completo para a mercearia, permitindo que o proprietário administre o estoque e as finanças (compra e vendas dos produtos) do estabelecimento de maneira mais eficiente.
 
 ## Alunos integrantes da equipe
 
