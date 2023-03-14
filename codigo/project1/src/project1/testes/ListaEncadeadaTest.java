@@ -1,20 +1,12 @@
-/**
- * 
- */
 package project1.testes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
-
 import project1.ListaEncadeada;
 import project1.Produto;
 
-/**
- * @author gabriel.tabatinga
- *
- */
 class ListaEncadeadaTest {
 
 	ListaEncadeada listaVazia;
@@ -22,9 +14,7 @@ class ListaEncadeadaTest {
 	
 	/**
 	 * @throws java.lang.Exception
-	 */
-	
-	
+	 */	
 	@BeforeEach
 	void setUp() throws Exception {
 		listaVazia = new ListaEncadeada();
@@ -38,8 +28,7 @@ class ListaEncadeadaTest {
 	� Repor o estoque (comprar) ou retirar do estoque (produtos e escolha do administrador)
 */
 
-	//Valida se o produto um foi inserido no estoque
-	//4
+	
 	@Test
 	void deveInserirUmProdutoNoEstoqueREPOSICAO() throws Exception {
 		produtoVazio.alterarDescricao("teste");
@@ -47,8 +36,6 @@ class ListaEncadeadaTest {
 		assertEquals(produtoVazio.getDescricao(), listaVazia.getProdutoPorID(produtoVazio.getID()).getDescricao());
 	}
 	
-	//Confere se varios produtos foram inseridos no estoque
-	//4
 	@Test
 	void deveInserirVariosProdutosNoEstoqueREPOSICAO() throws Exception {
 		for(int i = 0;i<10;i++) {
@@ -62,21 +49,17 @@ class ListaEncadeadaTest {
 		assertEquals("testeZ", listaVazia.getProdutoPorID(produtoTeste2.getID()).getDescricao());
 	}
 	
-	//testa o metodo "qtdProdutoEstoque" inserindo 1 produto
-	//quantos produtos constam no estoque
 	@Test
 	void deveMostrarNoEstoqueUmProduto() {
 		listaVazia.inserir(produtoVazio);
 		assertEquals(1, listaVazia.quantidadeProdutosEstoque());
 	}
 	
-	//testa o metodo "qtdProdutoEstoque" inserindo 0 produto
 	@Test
-	void deveMostrarNoEstoqueZeroProduto() {
+	void deveMostrarNoEstoqueNenhumProduto() {
 		assertEquals(0, listaVazia.quantidadeProdutosEstoque());
 	}
 	
-	//testa o metodo "qtdProdutoEstoque" inserindo varios produto
 	@Test
 	void DeveMostrarNoEstoqueSeisProdutos() {
 		listaVazia.inserir(produtoVazio);
@@ -88,9 +71,8 @@ class ListaEncadeadaTest {
 		assertEquals(6, listaVazia.quantidadeProdutosEstoque());
 	}
 	
-	//confere se a lista nao esta vazia 
 	@Test
-	void confereListaVazia() {
+	void deveRetornarErroCasoTenteEncontrarUmProdutoEmUmaListaVazia() {
 		ListaEncadeada lista = new ListaEncadeada();
 		Exception exception = assertThrows(Exception.class, () -> {
 			lista.getProdutoPorID(999999999);
@@ -98,10 +80,8 @@ class ListaEncadeadaTest {
 		String expectedMessage = "Nao foi possivel encontrar o item na lista: a lista esta vazia!";
 
 		assertEquals(expectedMessage, exception.getMessage());
-		
 	}
 	
-	//confere se foi removido 0 produto
 	@Test 
 	void deveRemoverUmProdutoNoEstoque() {
 		listaVazia.inserir(produtoVazio);
@@ -122,29 +102,24 @@ class ListaEncadeadaTest {
 		assertEquals(4, listaVazia.quantidadeProdutosEstoque());
 	}
 	
-	//verifica o estoque com qtd abaixa do minimo
 	@Test
-	void deveMostrarQuantidadeEstoqueMinimo() {
+	void deveMostrarQuantidadeEstoqueMinimoGerandoAlerta() {
 		produtoVazio.efetuarCompra(9);
 		produtoVazio.alterarDescricao("as");
 		listaVazia.inserir(produtoVazio);
 		assertEquals("as", listaVazia.produtosAbaixoMinimoEstoque());
-		
 	}
 	
-	//verifica o estoque com qtd acima do minimo; ou seja nao vai gerar alerta
 	@Test
-	void devequantidadeEstoqueMinimoAcimaDez() {
+	void deveMostrarQuantidadeEstoqueMinimoAcimaDez() {
 		produtoVazio.efetuarCompra(10);
 		produtoVazio.alterarDescricao("asa");
 		listaVazia.inserir(produtoVazio);
 		assertEquals("", listaVazia.produtosAbaixoMinimoEstoque());
-		
 	}
 	
-	// verifica o alerta do estoque minimo e a saida (se a descricao ta certa) 
 	@Test
-	void quantidadeVariosEstoqueMinimo() {
+	void deveExibirTodosOsProdutosQueEstaoComEstoqueAbaixoDoMinimo() {
 		produtoVazio.alterarDescricao("asa");
 		Produto produtoTeste2 = new Produto();
 		produtoTeste2.alterarDescricao("bsa");
@@ -163,13 +138,12 @@ class ListaEncadeadaTest {
 		listaVazia.inserir(produtoTeste3);
 		listaVazia.inserir(produtoTeste4);
 		
-		
 		assertEquals("asa bsa dsa", listaVazia.produtosAbaixoMinimoEstoque());
 	}
 	
 	//Verifica o valor total em $$ dos produtos no estoque
 	@Test
-	void valorTotalEmEstoque() {
+	void deveExibirValorTotalEmEstoque() {
 		produtoVazio.alterarPrecoCusto(3);
 		produtoVazio.efetuarCompra(10);
 		listaVazia.inserir(produtoVazio);
@@ -183,7 +157,7 @@ class ListaEncadeadaTest {
 	}
 	
 	@Test
-	void receberTodosProdutosEstoque() {
+	void deveReceberTodosProdutosDoEstoque() {
 		produtoVazio.alterarDescricao("asa");
 		Produto produtoTeste2 = new Produto();
 		produtoTeste2.alterarDescricao("bsa");
@@ -202,12 +176,11 @@ class ListaEncadeadaTest {
 		listaVazia.inserir(produtoTeste3);
 		listaVazia.inserir(produtoTeste4);
 		
-		
 		assertEquals("asa bsa csa dsa", listaVazia.listarProdutos());
 	}
 	
 	@Test
-	void verTotalVendido() throws Exception {
+	void deveMostrarTotalVendido() throws Exception {
 		produtoVazio.alterarDescricao("asse");
 		produtoVazio.alterarPrecoCusto(10);
 		produtoVazio.efetuarCompra(15);
@@ -217,7 +190,7 @@ class ListaEncadeadaTest {
 	}
 	
 	@Test
-	void verTotalAquisicao() throws Exception {
+	void deveMostrarTotalAquisicao() throws Exception {
 		produtoVazio.alterarDescricao("asse");
 		produtoVazio.alterarPrecoCusto(10);
 		produtoVazio.efetuarCompra(15);
