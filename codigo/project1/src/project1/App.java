@@ -79,8 +79,9 @@ public class App {
 
                 break;
             case 5:
-                //TO DO precisa listar todos os dados de todos os produtos e não só a descição
-            	listarProdutos();
+
+                mercearia.chamapercorrerListaEncadeada();
+                
                 break;
             case 6:
                 System.out.println("Valor do estoque atual: R$"); //FAZER

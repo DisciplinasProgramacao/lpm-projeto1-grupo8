@@ -179,7 +179,7 @@ public class ListaEncadeada {
 			envio = envio.substring(0, contador.length() - 2);
 		return envio;
 	}
-	
+
 	public double valorTotalVendido() {
 		
 		Celula celulaAux = this.primeira.proximo;
@@ -205,6 +205,16 @@ public class ListaEncadeada {
 		}
 		return total;
 	}
-		
+	public void percorrerListaEncadeada() {
+		Celula atual = this.primeira.proximo;;
+		while (atual != null) {
+			Produto item = atual.item;
+			System.out.println(item.getDescricao()+":\n" + item.listarInformacoesProduto());
+			System.out.println("---------------------------------");
+			atual = atual.proximo;
+		}
+	}
+	
+	
 	//#endregion
 }

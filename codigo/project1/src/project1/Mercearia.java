@@ -95,4 +95,7 @@ public class Mercearia {
 	public String receberInfosProduto (String descricao) throws Exception {
 		return this.listaProdutos.getProdutoPorDescricao(descricao).listarInformacoesProduto();
 	}
+	public void chamapercorrerListaEncadeada(){
+		this.listaProdutos.percorrerListaEncadeada();
+	}
 }
