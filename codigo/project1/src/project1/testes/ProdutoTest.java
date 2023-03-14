@@ -25,7 +25,7 @@ public class ProdutoTest {
         PrintStream novoFluxoDeImpressao = new PrintStream(output, true, "UTF-8");
         System.setOut(novoFluxoDeImpressao);
 
-         produtoInicial = new Produto("Descrição", 10, 10, 35);    
+         produtoInicial = new Produto("Descricao", 10, 10, 35);    
     }
 
     @AfterEach
@@ -90,7 +90,7 @@ public class ProdutoTest {
         produtoInicial.efetuarVenda(2);
         produtoInicial.efetuarVenda(5);
         produtoInicial.efetuarVenda(1);
-        assertEquals(produtoInicial.quantidadeTotalVendas, 8);
+        assertEquals(produtoInicial.getQuantidadeTotalVendas(), 8);
     }
 
     @Test
@@ -118,7 +118,7 @@ public class ProdutoTest {
         produtoInicial.efetuarCompra(2);
         produtoInicial.efetuarCompra(5);
         produtoInicial.efetuarCompra(1);
-        assertEquals(produtoInicial.quantidadeTotalComprada, 18);
+        assertEquals(produtoInicial.getQuantidadeTotalComprada(), 18);
     }
 
     @Test
@@ -132,5 +132,11 @@ public class ProdutoTest {
         produtoInicial.efetuarVenda(8);
         produtoInicial.efetuarCompra(9);
         assertFalse(produtoInicial.estoqueAbaixoDoMinimo());
-    }    
+    }
+
+    @Test
+    public void deveListarInformacoesDoProduto(){
+        String textoEsperado = "ID: "+ produtoInicial.getID() + "\nDescricao: Descricao\nQuantidade em estoque: 10\nQuantidade total comprada: 10\nQuantidade total vendida: 0\nValorTotalVendas: 0.0\nPreco custo: 10.0\nPreco venda: 15.93";
+        assertEquals(textoEsperado, produtoInicial.listarInformacoesProduto());
+    }
 }

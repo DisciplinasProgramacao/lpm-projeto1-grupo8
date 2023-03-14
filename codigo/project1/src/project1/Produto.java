@@ -15,8 +15,8 @@ public class Produto {
 	private int ID;
 	protected String descricao; // Deve possuir um mínimo de 3 caracteres
 	private int quantidadeEstoque; // Quantidade mínima de cada produto = 10 itens
-	public int quantidadeTotalComprada;
-	public int quantidadeTotalVendas;
+	private int quantidadeTotalComprada;
+	private int quantidadeTotalVendas;
 	private double valorTotalVendas;
 	private double valorTotalCompra;
 	private static double valorImposto;
@@ -53,6 +53,14 @@ public class Produto {
 	public double getValorTotalReposicao() {
 		return valorTotalCompra;
 	}
+	
+	public int getQuantidadeTotalComprada() {
+		return quantidadeTotalComprada;
+	}
+
+	public int getQuantidadeTotalVendas() {
+		return quantidadeTotalVendas;
+	}	
 
 	// #endregion
 
