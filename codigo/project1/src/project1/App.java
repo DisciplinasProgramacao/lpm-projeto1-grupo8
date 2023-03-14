@@ -59,38 +59,49 @@ public class App {
 
                 break;
             case 3:
-            	produto.efetuarCompra(6);
+                listarProdutos();
+
+                System.out.println("Digite qual produto esta sendo comprado: ");
+                desc = leitor.nextLine();
+
+                System.out.println("Digite a quantidade: ");
+                qntTotalAdquirido = leitor.nextInt();
+
+                mercearia.comprar(desc, qntTotalAdquirido);
 
                 break;
             case 4:
-                //Consultar dados de um produto especifico.
             	listarProdutos();
+
             	System.out.println("Digite qual produto sera consultado: ");
             	String prodCons = leitor.nextLine();
             	System.out.println(mercearia.receberInfosProduto(prodCons));
+
                 break;
             case 5:
-                //5) Consultar todos os produtos.
+                //TO DO precisa listar todos os dados de todos os produtos e não só a descição
             	listarProdutos();
                 break;
             case 6:
-                //6) Exibir balanço da empresa (valor do estoque atual, valor vendido e gasto em pedidos de reposicao).
+                System.out.println("Valor do estoque atual: R$"); //FAZER
+                System.out.println("Valor total vendido: R$" + mercearia.receberValorTotalVendido());
+                System.out.println("Valor total gasto em pedidos de reposicao: R$" + mercearia.receberValorTotalReposicao());
                 break;
             case 7:
-                //7) Remover produto da mercearia.
                 listarProdutos();
+                
             	System.out.println("Digite qual produto sera removido do estoque: ");
                 String prodRem = leitor.nextLine();
-                mercearia.removerProduto(prodRem);                
+                mercearia.removerProduto(prodRem); 
+
                 break;
             case 8:
-                //8) Exibir quantidade total de produtos em estoque.
+                System.out.println("Quantidade total de produtos em estoque: " + mercearia.receberQtdProdutosCadastradosEstoque());
                 break;
             case 9:
-                //9) Listar produtos com estoque abaixo do mínimo.                
+                System.out.println("Produtos com estoque abaixo do mínimo: " + mercearia.receberNomesProdutosAbaixoMinimoEstoque());             
                 break;
             case 10:
-            	listarProdutos();
                 break;
         }
     }
