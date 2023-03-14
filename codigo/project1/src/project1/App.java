@@ -13,8 +13,8 @@ public class App {
         exibirMenu();
 
         opcaoMenu = leitor.nextInt();
-        while(opcaoMenu != 12) {
-            if (opcaoMenu < 1 || opcaoMenu > 12) {
+        while(opcaoMenu != 10) {
+            if (opcaoMenu < 1 || opcaoMenu > 10) {
                 System.out.println("Opcao invalida do Menu!");
             } else {
                 executaOpcaoMenu(opcaoMenu);
@@ -35,11 +35,11 @@ public class App {
         produto = new Produto("Banana Doce", 100, 2, 50);
         switch (opcaoMenu) {
             case 1:
-                System.out.println("Por gentileza, digite a descriçãÃ£o do produto:");
+                System.out.println("Por gentileza, digite a descricao do produto:");
                 desc = leitor.nextLine();
                 System.out.println("Agora digite o total adquirido do produto:");
                 qntTotalAdquirido = leitor.nextInt();
-                System.out.println("O preç§o de custo do produto:");
+                System.out.println("O preco de custo do produto:");
                 precoCusto = leitor.nextDouble();
                 System.out.println("E por fim a margem de lucro: ");
                 margemLucro = leitor.nextDouble();
@@ -63,60 +63,46 @@ public class App {
 
                 break;
             case 4:
-               mercearia.adicionarProduto(produto);
-               System.out.println(produto.getDescricao());
+                //Consultar dados de um produto especifico.
                 break;
             case 5:
-            	listarProdutos();
-            	System.out.println("Digite qual produto sera removido do estoque: ");
-                String prodRem = leitor.nextLine();
-                mercearia.removerProduto(prodRem);
+                //5) Consultar todos os produtos.
                 break;
             case 6:
-                System.out.println(mercearia.receberQtdProdutosCadastradosEstoque()+ "\n" + mercearia.listarProdutos());
+                //6) Exibir balanço da empresa (valor do estoque atual, valor vendido e gasto em pedidos de reposicao).
                 break;
             case 7:
-
-                System.out.println(mercearia.receberValorTotalEmEstoque());
-                
+                //7) Remover produto da mercearia.
+                /*listarProdutos();
+            	System.out.println("Digite qual produto sera removido do estoque: ");
+                String prodRem = leitor.nextLine();
+                mercearia.removerProduto(prodRem);*/                
                 break;
             case 8:
-
-                System.out.println(mercearia.receberNomesProdutosAbaixoMinimoEstoque());
-
+                //8) Exibir quantidade total de produtos em estoque.
                 break;
             case 9:
-                System.out.println("Digite a descricao do produto que deseja pesquisar: ");
-                desc = leitor.nextLine();
-                mercearia.receberProdutoPorDescricao(desc);
-                
+                //9) Listar produtos com estoque abaixo do mínimo.                
                 break;
             case 10:
-                // mercearia.receberProdutoPorID(produto.getID());
-
                 break;
-            case 11:
-            	listarProdutos();
-            	break;
         }
     }
 
     public static void exibirMenu() {
         System.out.println("Bem vindo a Mercaria do Jhon Jhon");
-        System.out.println("Abaixo temos opções de funcionamento da mercearia!");
+        System.out.println("Abaixo temos opcoes de funcionamento da mercearia!");
         System.out.println("----------------------------------------------------------------------");
-        System.out.println("1) Criar produtos novos no estoque.\n");
-        System.out.println("2) Efetuar venda.\n");
+        System.out.println("1) Adicionar novos produtos a mercearia.\n");
+        System.out.println("2) Vender produtos.\n");
         System.out.println("3) Efetuar compra de produtos para repor o estoque.\n");
-        System.out.println("4) Adicionar produto a mercearia.\n");
-        System.out.println("5) Remover produto da mercearia.\n");
-        System.out.println("6) Quantidade produtos estoque.\n");
-        System.out.println("7) Valor total do estoque.\n");
-        System.out.println("8) Produtos abaixo do estoque.\n");
-        System.out.println("9) Produtos por descricao.\n");
-        System.out.println("10) Produtos por ID.\n");
-        System.out.println("11) Listar Produtos.\n");
-        System.out.println("12) Sair.\n");
+        System.out.println("4) Consultar dados de um produto especifico.\n");
+        System.out.println("5) Consultar todos os produtos.\n");
+        System.out.println("6) Exibir balanço da empresa (valor do estoque atual, valor vendido e gasto em pedidos de reposicao).\n");    
+        System.out.println("7) Remover produto da mercearia.\n");
+        System.out.println("8) Exibir quantidade total de produtos em estoque.\n");
+        System.out.println("9) Listar produtos com estoque abaixo do mínimo.\n");
+        System.out.println("10) Sair.\n");
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Digite qual deseja executar: ");
     }
