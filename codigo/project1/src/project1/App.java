@@ -96,7 +96,7 @@ public class App {
 
                 break;
             case 8:
-                System.out.println("Quantidade total de produtos em estoque: " + mercearia.receberQtdProdutosCadastradosEstoque());
+                System.out.println("Quantidade total de produtos distintos em estoque: " + mercearia.receberQtdProdutosCadastradosEstoque());
                 break;
             case 9:
                 System.out.println("Produtos com estoque abaixo do mínimo: " + mercearia.receberNomesProdutosAbaixoMinimoEstoque());             
@@ -117,7 +117,7 @@ public class App {
         System.out.println("5) Consultar todos os produtos.\n");
         System.out.println("6) Exibir balanço da empresa (valor do estoque atual, valor vendido e gasto em pedidos de reposicao).\n");    
         System.out.println("7) Remover produto da mercearia.\n");
-        System.out.println("8) Exibir quantidade total de produtos em estoque.\n");
+        System.out.println("8) Exibir quantidade total de tipos de produtos no estoque.\n");
         System.out.println("9) Listar produtos com estoque abaixo do minimo.\n");
         System.out.println("10) Sair.\n");
         System.out.println("----------------------------------------------------------------------");
