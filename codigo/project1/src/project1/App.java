@@ -22,6 +22,7 @@ public class App {
             exibirMenu();
             opcaoMenu = leitor.nextInt();
         }
+        System.out.println("Ate a proxima!");
 
     }
 
@@ -104,6 +105,8 @@ public class App {
                 break;
             case 10:
                 break;
+            default:
+                break;
         }
     }
 
@@ -127,8 +130,8 @@ public class App {
     
     public static void adicionarProdutos() {
     	Produto produto = new Produto("Banana Doce", 100, 2, 50);
-    	Produto produto2 = new Produto("Duzia ovo", 20, 8, 35);
-    	Produto produto3 = new Produto("Leite", 50, 1.5, 50);
+    	Produto produto2 = new Produto("Ovo caipira", 20, 8, 35);
+    	Produto produto3 = new Produto("Leite de cabra", 50, 1.5, 50);
     	mercearia.adicionarProduto(produto);
     	mercearia.adicionarProduto(produto2);
     	mercearia.adicionarProduto(produto3);
