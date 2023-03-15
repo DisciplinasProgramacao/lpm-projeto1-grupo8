@@ -3,6 +3,12 @@ package project1;
 import java.util.Scanner;
 
 public class App {
+    static Scanner leitor = new Scanner(System.in);
+    static Produto produto;
+    static String descricaoProduto;
+    static int qntProduto;
+    static double precoCusto;
+    static double margemLucro;
     static Mercearia mercearia = new Mercearia();
     
     public static void main(String[] args) throws Exception {
@@ -18,7 +24,6 @@ public class App {
                 System.out.println("Opcao invalida do Menu!");
             } else {
                 executaOpcaoMenu(opcaoMenu);
-                System.out.println("10) Voltar ao menu.\n");
                 awaitMenu();
             }
             exibirMenu();
@@ -29,6 +34,7 @@ public class App {
     }
 
     private static void awaitMenu() {
+        System.out.println("\n10) Voltar ao menu.\n");
         Scanner leitor = new Scanner(System.in);
         int opcaoMenu = leitor.nextInt();
         while (opcaoMenu != 10){
@@ -37,75 +43,33 @@ public class App {
     }
 
     private static void executaOpcaoMenu(int opcaoMenu) throws Exception {
-        Scanner leitor = new Scanner(System.in);
-        Produto produto;
-        String desc;
-        int qntTotalAdquirido;
-        double precoCusto;
-        double margemLucro;
+       
         produto = new Produto("Banana Doce", 100, 2, 50);
         switch (opcaoMenu) {
             case 1:
-                System.out.println("Por gentileza, digite a descricao do produto:");
-                desc = leitor.nextLine();
-                System.out.println("Agora digite o total adquirido do produto:");
-                qntTotalAdquirido = leitor.nextInt();
-                System.out.println("O preco de custo do produto:");
-                precoCusto = leitor.nextDouble();
-                System.out.println("E por fim a margem de lucro: ");
-                margemLucro = leitor.nextDouble();
-                System.out.println("Criando produto!");
-                mercearia.adicionarProduto(desc, precoCusto, margemLucro, qntTotalAdquirido);
+                criarProdutos();
                 break;
             case 2:
             	listarProdutos();
-
-                System.out.println("Digite qual produto esta sendo vendido: ");
-                String descricaoProduto = leitor.nextLine();
-
-                System.out.println("Digite a quantidade: ");
-                int quantidade = leitor.nextInt();
-
-                mercearia.vender(descricaoProduto, quantidade);
-
+                venderProduto();
                 break;
             case 3:
                 listarProdutos();
-
-                System.out.println("Digite qual produto esta sendo comprado: ");
-                desc = leitor.nextLine();
-
-                System.out.println("Digite a quantidade: ");
-                qntTotalAdquirido = leitor.nextInt();
-
-                mercearia.comprar(desc, qntTotalAdquirido);
-
+                comprarProduto();
                 break;
             case 4:
             	listarProdutos();
-
-            	System.out.println("Digite qual produto sera consultado: ");
-            	String prodCons = leitor.nextLine();
-            	System.out.println(mercearia.receberInfosProduto(prodCons));
-
+                pesquisarProduto();
                 break;
             case 5:
-
                 mercearia.chamapercorrerListaEncadeada();
-                
                 break;
             case 6:
-                System.out.println("Valor do estoque atual: R$" + mercearia.receberValorTotalEmEstoque());
-                System.out.println("Valor total vendido: R$" + mercearia.receberValorTotalVendido());
-                System.out.println("Valor total gasto em pedidos de reposicao: R$" + mercearia.receberValorTotalReposicao());
+                exibirBalancoEmpresa();
                 break;
             case 7:
                 listarProdutos();
-                
-            	System.out.println("Digite qual produto sera removido do estoque: ");
-                String prodRem = leitor.nextLine();
-                mercearia.removerProduto(prodRem); 
-
+                removerProduto();
                 break;
             case 8:
                 System.out.println("Quantidade total de produtos distintos em estoque: " + mercearia.receberQtdProdutosCadastradosEstoque());
@@ -118,6 +82,58 @@ public class App {
             default:
                 break;
         }
+    }
+
+    private static void exibirBalancoEmpresa() {
+        System.out.println("Valor do estoque atual: R$" + mercearia.receberValorTotalEmEstoque());
+        System.out.println("Valor total vendido: R$" + mercearia.receberValorTotalVendido());
+        System.out.println("Valor total gasto em pedidos de reposicao: R$" + mercearia.receberValorTotalReposicao());
+    }
+
+    private static void removerProduto() throws Exception {
+        System.out.println("Digite qual produto sera removido do estoque: ");
+        String prodRem = leitor.nextLine();
+        mercearia.removerProduto(prodRem); 
+    }
+
+    private static void pesquisarProduto() throws Exception {
+        System.out.println("Digite qual produto sera consultado: ");
+        String prodCons = leitor.nextLine();
+        System.out.println(mercearia.receberInfosProduto(prodCons));
+    }
+
+    private static void comprarProduto() {
+        System.out.println("Digite qual produto esta sendo comprado: ");
+        descricaoProduto = leitor.nextLine();
+
+        System.out.println("Digite a quantidade: ");
+        qntProduto = leitor.nextInt();
+
+        mercearia.comprar(descricaoProduto, qntProduto);
+    }
+
+    private static void venderProduto() throws Exception {
+        System.out.println("Digite qual produto esta sendo vendido: ");
+        String descricaoProduto = leitor.nextLine();
+
+        System.out.println("Digite a quantidade: ");
+        int quantidade = leitor.nextInt();
+
+        mercearia.vender(descricaoProduto, quantidade);
+
+    }
+
+    private static void criarProdutos() {
+        System.out.println("Por gentileza, digite a descricao do produto:");
+        descricaoProduto = leitor.nextLine();
+        System.out.println("Agora digite o total adquirido do produto:");
+        qntProduto = leitor.nextInt();
+        System.out.println("O preco de custo do produto:");
+        precoCusto = leitor.nextDouble();
+        System.out.println("E por fim a margem de lucro: ");
+        margemLucro = leitor.nextDouble();
+        System.out.println("Criando produto!");
+        mercearia.adicionarProduto(descricaoProduto, precoCusto, margemLucro, qntProduto);
     }
 
     public static void exibirMenu() {
