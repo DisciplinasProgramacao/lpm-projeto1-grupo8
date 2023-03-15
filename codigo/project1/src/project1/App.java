@@ -18,12 +18,22 @@ public class App {
                 System.out.println("Opcao invalida do Menu!");
             } else {
                 executaOpcaoMenu(opcaoMenu);
+                System.out.println("10) Voltar ao menu.\n");
+                awaitMenu();
             }
             exibirMenu();
             opcaoMenu = leitor.nextInt();
         }
         System.out.println("Ate a proxima!");
 
+    }
+
+    private static void awaitMenu() {
+        Scanner leitor = new Scanner(System.in);
+        int opcaoMenu = leitor.nextInt();
+        while (opcaoMenu != 10){
+            opcaoMenu = leitor.nextInt();
+        }
     }
 
     private static void executaOpcaoMenu(int opcaoMenu) throws Exception {
@@ -85,7 +95,7 @@ public class App {
                 
                 break;
             case 6:
-                System.out.println("Valor do estoque atual: R$"); //FAZER
+                System.out.println("Valor do estoque atual: R$" + mercearia.receberValorTotalEmEstoque());
                 System.out.println("Valor total vendido: R$" + mercearia.receberValorTotalVendido());
                 System.out.println("Valor total gasto em pedidos de reposicao: R$" + mercearia.receberValorTotalReposicao());
                 break;
