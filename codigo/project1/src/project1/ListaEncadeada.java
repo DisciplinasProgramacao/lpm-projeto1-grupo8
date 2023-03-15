@@ -209,6 +209,10 @@ public class ListaEncadeada {
 		}
 		return total;
 	}
+	/**
+	 * Método que imprime TODO o conteúdo de cada item da Lista (Produto) 
+	 *
+	 */
 	public void percorrerListaEncadeada() {
 		Celula atual = this.primeira.proximo;;
 		while (atual != null) {
