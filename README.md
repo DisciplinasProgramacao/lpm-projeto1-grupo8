@@ -19,3 +19,6 @@ O objetivo deste projeto é criar um sistema completo para a mercearia, permitin
 
 ## Link UML
 https://app.diagrams.net/#G1QZmhGfsUB86qOo25eu-PLi-GJ5yVat4v
+
+![TP1-Diagrama de Classes drawio](https://user-images.githubusercontent.com/89463780/225186211-dfe33dcc-7fb5-41b6-a73c-5e3c136fe28a.png)
+
