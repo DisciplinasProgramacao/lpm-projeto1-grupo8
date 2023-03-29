@@ -167,5 +167,11 @@ public class Mercearia {
 	public String receberInfosProduto (String descricao) throws Exception {
 		return this.listaProdutos.getProdutoPorDescricao(descricao).listarInformacoesProduto();
 	}
-	// #endregion
+
+	/**
+	 * Chama método que mostra a descricao com os dados de TODOS os produtos do Estoque
+	 */
+    public void chamapercorrerListaEncadeada() {
+		this.listaProdutos.percorrerListaEncadeada();
+    }
 }

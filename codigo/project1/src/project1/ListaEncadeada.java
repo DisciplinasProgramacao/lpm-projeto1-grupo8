@@ -180,10 +180,6 @@ public class ListaEncadeada {
 		return envio;
 	}
 	
-	/**
-	 * Calcula o valor total de produtos vendidos no estoque
-	 * @return total
-	 */
 	public double valorTotalVendido() {
 		
 		Celula celulaAux = this.primeira.proximo;
@@ -213,6 +209,20 @@ public class ListaEncadeada {
 		}
 		return total;
 	}
-		
+	/**
+	 * Método que imprime TODO o conteúdo de cada item da Lista (Produto) 
+	 *
+	 */
+	public void percorrerListaEncadeada() {
+		Celula atual = this.primeira.proximo;;
+		while (atual != null) {
+			Produto item = atual.item;
+			System.out.println(item.getDescricao()+":\n" + item.listarInformacoesProduto());
+			System.out.println("---------------------------------");
+			atual = atual.proximo;
+		}
+	}
+	
+	
 	//#endregion
 }
