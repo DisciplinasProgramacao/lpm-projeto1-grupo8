@@ -5,6 +5,35 @@ O mercado varejista está em constante evolução, e acompanhar as mudanças é 
 
 O objetivo deste projeto é criar um sistema completo para a mercearia, permitindo que o proprietário administre o estoque e as finanças (compra e vendas dos produtos) do estabelecimento de maneira mais eficiente.
 
+--
+
+## Nota base do grupo: 11,4
+
+A nota final, que é individual, se dará pela nota acima, multiplicada por um peso entre 0 e 1 relativo ao acompanhamento semanal do projeto. Lembre-se: não é só a entrega do produto finalizado que importa, é todo o processo de sua construção e as entregas parciais para o “cliente”.
+
+## Comentários
+- sem tirar pontos (por enquanto)
+    - não adianta lançar uma exceção e não tratar no main. Mata o sistema do mesmo jeito.
+    - construtor deve ter documentação dos parâmetros
+    
+### Diagrama + aderência das classes ao diagrama: 0/2 pontos 
+	- não encontrei diagrama
+### Requisitos corretamente implementados: 5/6 pontos 
+	- produto (preço, estoque)
+	- estoque (valor, abaixo do estoque)
+        - um estoque CONTÉM uma lista. os métodos de estoque ficam no estoque, não na lista (que apenas guarda os dados)
+	- sistema (vender, comprar, consultas)
+        - compra está pulando nome do produto e dá erro.
+
+### Documentação de código: 2,4/3 pontos 
+- documentação deve ser completa. Por ex: para que serve o logger em efetuar venda? O que significa um retorno 0 no método? Quando/por que é gerada uma exceção?	
+	
+### Testes (quantidade e qualidade): 4/4 pontos 
+    - produto: /2 pontos
+	- estoque: /2 pontos
+	
+--
+
 ## Alunos integrantes da equipe
 
 * Arthur Jansen Oliveira
